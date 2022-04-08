@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 abstract class CustomColors {
   static const Color backgroungLoginColor = Color(0xFF5B4DA7);
+  static const Color widgetLoginColor = Color.fromARGB(129, 125, 109, 215);
   static const Color defaultFontColor = Color(0xFFFFFFFF);
   static const Color inputBoxColor = Color.fromARGB(77, 255, 255, 255);
   static const Color backgroungLoginTransparent =

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:xtintas/controller/bloc/login_bloc.dart';
 import 'package:xtintas/utils/custom_colors.dart';
 import 'package:xtintas/utils/fonts.dart';
 
@@ -9,6 +11,7 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loginBloc = context.read<LoginBloc>();
     final screenSize = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
@@ -23,99 +26,115 @@ class LoginPage extends StatelessWidget {
             ],
           ),
         ),
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.all(screenSize.width * 0.07),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: screenSize.height * 0.16,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(
-                      Icons.color_lens,
-                      size: 50,
-                      color: CustomColors.defaultFontColor,
-                    ),
-                    Text(
-                      "XTintas",
-                      style: CustomFont.titleStyle,
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: screenSize.height * 0.115,
-                ),
-                Text(
-                  'Entrar na plataforma',
-                  style: CustomFont.subTitleStyle,
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(
-                  height: screenSize.height * 0.05,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'E-mail',
-                        style: CustomFont.defaultTextStyle,
-                      )),
-                ),
-                TextField(
-                  controller: textMailController,
-                  style: CustomFont.inputTextStyle,
-                  decoration: const InputDecoration(
-                      filled: true,
-                      fillColor: CustomColors.inputBoxColor,
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white))),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Senha',
-                        style: CustomFont.defaultTextStyle,
-                      )),
-                ),
-                TextField(
-                  controller: textPasswordController,
-                  style: CustomFont.inputTextStyle,
-                  decoration: const InputDecoration(
-                      filled: true,
-                      fillColor: CustomColors.inputBoxColor,
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white))),
-                ),
-                SizedBox(
-                  height: screenSize.width * 0.10,
-                ),
-                ElevatedButton(
-                  onPressed: (() {
-                    print(
-                        '${textMailController.text}${textPasswordController.text}');
-                  }),
-                  child: Image.asset('assets/login_buttom.png'),
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                        CustomColors.buttomPrimaryColor),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50.0),
+        child: Stack(clipBehavior: Clip.none, children: [
+          Align(
+            alignment: Alignment.bottomRight,
+            child: Container(
+              height: screenSize.height * 0.4,
+              width: screenSize.height * 0.4,
+              decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(100)),
+                  color: CustomColors.widgetLoginColor),
+            ),
+          ),
+          SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.all(screenSize.width * 0.07),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: screenSize.height * 0.16,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset('assets/bucket_paint.png', scale: 3),
+                      Text(
+                        "XTintas",
+                        style: CustomFont.titleStyle,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: screenSize.height * 0.115,
+                  ),
+                  Text(
+                    'Entrar na plataforma',
+                    style: CustomFont.subTitleStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(
+                    height: screenSize.height * 0.05,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'E-mail',
+                          style: CustomFont.defaultTextStyle,
+                        )),
+                  ),
+                  TextField(
+                    controller: textMailController,
+                    style: CustomFont.inputTextStyle,
+                    decoration: const InputDecoration(
+                        filled: true,
+                        fillColor: CustomColors.inputBoxColor,
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white))),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Senha',
+                          style: CustomFont.defaultTextStyle,
+                        )),
+                  ),
+                  TextField(
+                    controller: textPasswordController,
+                    style: CustomFont.inputTextStyle,
+                    decoration: const InputDecoration(
+                        filled: true,
+                        fillColor: CustomColors.inputBoxColor,
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white))),
+                  ),
+                  SizedBox(
+                    height: screenSize.width * 0.10,
+                  ),
+                  ElevatedButton(
+                    onPressed: (() {
+                      loginBloc.getUser(
+                          email: textMailController.text,
+                          password: textPasswordController.text);
+                      print(
+                          '${textMailController.text}${textPasswordController.text}');
+                    }),
+                    child: Image.asset('assets/login_buttom.png'),
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          CustomColors.buttomPrimaryColor),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50.0),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                  SizedBox(height: screenSize.height * 0.03),
+                  Text(
+                    "Esqueci a minha senha",
+                    style: CustomFont.inputTextStyle2,
+                  )
+                ],
+              ),
             ),
           ),
-        ),
+        ]),
       ),
     );
   }

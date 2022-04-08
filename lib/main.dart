@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:xtintas/controller/bloc/login_bloc.dart';
 import 'package:xtintas/presentation/views/login_page.dart';
 
 void main() {
@@ -10,10 +12,9 @@ class XtintadApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
-      
-      debugShowCheckedModeBanner: false,
-      home: LoginPage(),
+    return BlocProvider(
+      create: (context) => LoginBloc(),
+      child: MaterialApp(debugShowCheckedModeBanner: false, home: LoginPage()),
     );
   }
 }

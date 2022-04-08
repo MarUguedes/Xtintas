@@ -16,4 +16,8 @@ abstract class CustomFont {
       fontSize: 16,
       color: const Color.fromARGB(210, 255, 255, 255));
   static final defaultTextStyle = GoogleFonts.openSans(fontSize: 16,color: CustomColors.defaultFontColor,fontWeight: FontWeight.bold);
+  static final inputTextStyle2 = GoogleFonts.openSans(
+      
+      fontSize: 14,
+      color: Color.fromARGB(179, 255, 255, 255));
 }

@@ -19,7 +19,7 @@ class LoginBlocState {
 }
 
 class LoginBloc extends Cubit<LoginBlocState> {
-  LoginBloc(LoginBlocState initialState) : super(LoginBlocState.empty);
+  LoginBloc() : super(LoginBlocState.empty);
   AuthRepository authRepository = AuthRepository();
 
   void getUser({required String email, required String password}) async {
