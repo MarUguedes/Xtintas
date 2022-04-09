@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xtintas/controller/bloc/login_bloc.dart';
+import 'package:xtintas/presentation/views/how_to_do_page.dart';
 import 'package:xtintas/presentation/views/login_page.dart';
 
 void main() {
@@ -14,7 +15,15 @@ class XtintadApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => LoginBloc(),
-      child: MaterialApp(debugShowCheckedModeBanner: false, home: LoginPage()),
+      child: MaterialApp(
+        initialRoute: '/',
+        routes: {
+          '/':(context) => LoginPage(),
+          '/howToDo':(context) => HowToDoPAge()
+        },
+        debugShowCheckedModeBanner: false,
+        
+      ),
     );
   }
 }

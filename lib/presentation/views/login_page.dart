@@ -108,6 +108,7 @@ class LoginPage extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: (() {
+                      Navigator.of(context).pushNamed('/howToDo');
                       loginBloc.getUser(
                           email: textMailController.text,
                           password: textPasswordController.text);

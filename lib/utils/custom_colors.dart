@@ -13,4 +13,5 @@ abstract class CustomColors {
   static const Color borderColor = Color(0xff40404026);
   static const Color cardColor = Color(0xffeaeaeaa);
   static const Color textColor = Color(0xFF161616);
+  static const Color indexColor = Color(0xFF5B4DA7);
 }
