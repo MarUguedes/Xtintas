@@ -25,14 +25,14 @@ class CardInfo extends StatelessWidget {
               style: CustomFont.indexStyle,
             ),
             const SizedBox(
-              width: 10,
+              width: 8,
             ),
             Text(
               title,
               style: CustomFont.subtitleStyle2,
             ),
             const SizedBox(
-              width: 26,
+              width: 15,
             ),
             icon ?? const SizedBox.shrink()
           ],

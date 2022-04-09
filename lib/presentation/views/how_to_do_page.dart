@@ -3,6 +3,7 @@ import 'package:xtintas/presentation/widgets/cardInfo.dart';
 import 'package:xtintas/presentation/widgets/timerWidget.dart';
 import 'package:xtintas/utils/custom_colors.dart';
 import 'package:xtintas/utils/fonts.dart';
+import 'package:xtintas/utils/strings.dart';
 
 class HowToDoPAge extends StatelessWidget {
   const HowToDoPAge({Key? key}) : super(key: key);
@@ -18,7 +19,7 @@ class HowToDoPAge extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  "Como pintar",
+                  Strings.howToDoTitle,
                   style: CustomFont.titleStyle2,
                 ),
                 const SizedBox(
@@ -34,15 +35,17 @@ class HowToDoPAge extends StatelessWidget {
                 ),
                 CardInfo(
                   index: 1,
-                  title: 'Prepare a tinta',
-                  text: 'Abra a tinta e a coloque na caçamba',
+                  title: Strings.stepOneTitle,
+                  text: Strings.stepOneText
+                  
+                ,
                   icon: const Icon(Icons.format_color_fill),
                 ),
                 CardInfo(
                   index: 2,
-                  title: 'Primeira demão',
+                  title: Strings.stepTwoTitle,
                   text:
-                      'Aplique a tinta na parede em N como mostrado no vídeo para melhor aproveitamento',
+                      Strings.stepTwoText,
                   icon: const Icon(Icons.format_paint),
                 ),
                 const Icon(
@@ -55,9 +58,8 @@ class HowToDoPAge extends StatelessWidget {
                 ),
                 CardInfo(
                   index: 3,
-                  title: 'Repasse a tinta',
-                  text:
-                      'Passe mais uma camada de tinta por cima da parede para reduzir imperfeições',
+                  title: Strings.stepThreeTitle,
+                  text: Strings.stepThreeText,
                   icon: const Icon(Icons.format_paint),
                 ),
                 const SizedBox(
@@ -69,16 +71,14 @@ class HowToDoPAge extends StatelessWidget {
                 ),
                 CardInfo(
                   index: 5,
-                  title: 'Segunda demão',
-                  text:
-                      'Aplique a tinta na parede em N como mostrado no vídeo para melhor aproveitamento',
+                  title: Strings.stepFiveTitle,
+                  text: Strings.stepFiveText,
                   icon: const Icon(Icons.format_paint),
                 ),
                 CardInfo(
                   index: 6,
-                  title: 'Repasse a tinta',
-                  text:
-                      'Passe mais uma camada de tinta por cima da parede para reduzir imperfeições',
+                  title: Strings.stepSixTitle,
+                  text:Strings.stepSixText,
                   icon: const Icon(Icons.format_paint),
                 ),
                 const TimerWidget(),
@@ -87,8 +87,8 @@ class HowToDoPAge extends StatelessWidget {
                 ),
                 CardInfo(
                   index: 7,
-                  title: 'Acabou',
-                  text: 'Sua parede está pronta',
+                  title: Strings.stepSevenTitle,
+                  text: Strings.stepSevenText,
                 )
               ],
             ),
