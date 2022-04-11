@@ -4,15 +4,36 @@ import 'package:xtintas/controller/bloc/login_bloc.dart';
 import 'package:xtintas/utils/custom_colors.dart';
 import 'package:xtintas/utils/fonts.dart';
 
-class LoginPage extends StatelessWidget {
-  LoginPage({Key? key}) : super(key: key);
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   TextEditingController textMailController = TextEditingController();
+
   TextEditingController textPasswordController = TextEditingController();
+
+  bool isObscured = true;
+  void setVisibility() {
+    setState(() {
+      isObscured = !isObscured;
+    });
+  }
+
+  
 
   @override
   Widget build(BuildContext context) {
     final loginBloc = context.read<LoginBloc>();
     final screenSize = MediaQuery.of(context).size;
+bool isValidEmail() {
+    return RegExp(
+            r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
+        .hasMatch(textMailController.text);
+  }
     return Scaffold(
       body: Container(
         height: screenSize.height,
@@ -27,14 +48,15 @@ class LoginPage extends StatelessWidget {
           ),
         ),
         child: Stack(clipBehavior: Clip.none, children: [
-          Align(
-            alignment: Alignment.bottomRight,
+          Positioned(
+            bottom: -200,
+            right: -100,
             child: Container(
-              height: screenSize.height * 0.4,
-              width: screenSize.height * 0.4,
+              height: 400,
+              width: 400,
               decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(100)),
-                  color: CustomColors.widgetLoginColor),
+                  borderRadius: BorderRadius.all(Radius.circular(200)),
+                  color: Color.fromARGB(150, 125, 109, 215)),
             ),
           ),
           SingleChildScrollView(
@@ -76,7 +98,8 @@ class LoginPage extends StatelessWidget {
                           style: CustomFont.defaultTextStyle,
                         )),
                   ),
-                  TextField(
+                  TextFormField(
+                   
                     controller: textMailController,
                     style: CustomFont.inputTextStyle,
                     decoration: const InputDecoration(
@@ -95,13 +118,23 @@ class LoginPage extends StatelessWidget {
                         )),
                   ),
                   TextField(
+                    obscureText: isObscured,
                     controller: textPasswordController,
                     style: CustomFont.inputTextStyle,
-                    decoration: const InputDecoration(
-                        filled: true,
-                        fillColor: CustomColors.inputBoxColor,
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white))),
+                    decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          isObscured ? Icons.visibility_off : Icons.visibility,
+                          color: CustomColors.cardColor,
+                        ),
+                        onPressed: setVisibility,
+                      ),
+                      filled: true,
+                      fillColor: CustomColors.inputBoxColor,
+                      focusedBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                    ),
                   ),
                   SizedBox(
                     height: screenSize.width * 0.10,

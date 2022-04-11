@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:xtintas/presentation/widgets/cardInfo.dart';
-import 'package:xtintas/presentation/widgets/timerWidget.dart';
+import 'package:xtintas/presentation/widgets/card_info_widget.dart';
+import 'package:xtintas/presentation/widgets/timer_widget.dart';
 import 'package:xtintas/utils/custom_colors.dart';
 import 'package:xtintas/utils/fonts.dart';
 import 'package:xtintas/utils/strings.dart';
