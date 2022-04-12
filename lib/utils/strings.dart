@@ -1,4 +1,10 @@
 abstract class Strings {
+  static const appName = 'Xtintas';
+  static const satisfactiontitle= 'Avalie a experiência';
+   static const badSatisfaction= 'Fraca';
+   static const mediumSatisfaction= 'Mediana';
+   static const goodatisfaction= 'Ótima!';
+   static const submitText= 'Enviar';
   static const howToDoTitle = 'Como pintar';
   static const stepOneTitle = 'Prepare a tinta';
   static const stepOneText = 'Abra a tinta e a coloque na caçamba';

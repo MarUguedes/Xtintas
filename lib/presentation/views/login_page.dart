@@ -13,7 +13,6 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   TextEditingController textMailController = TextEditingController();
-
   TextEditingController textPasswordController = TextEditingController();
 
   bool isObscured = true;
@@ -29,11 +28,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     final loginBloc = context.read<LoginBloc>();
     final screenSize = MediaQuery.of(context).size;
-bool isValidEmail() {
-    return RegExp(
-            r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
-        .hasMatch(textMailController.text);
-  }
+
     return Scaffold(
       body: Container(
         height: screenSize.height,
@@ -49,7 +44,7 @@ bool isValidEmail() {
         ),
         child: Stack(clipBehavior: Clip.none, children: [
           Positioned(
-            bottom: -200,
+            bottom: -300,
             right: -100,
             child: Container(
               height: 400,
@@ -125,7 +120,7 @@ bool isValidEmail() {
                       suffixIcon: IconButton(
                         icon: Icon(
                           isObscured ? Icons.visibility_off : Icons.visibility,
-                          color: CustomColors.cardColor,
+                          color: CustomColors.defaultFontColor
                         ),
                         onPressed: setVisibility,
                       ),

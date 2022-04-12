@@ -17,17 +17,18 @@ abstract class CustomFont {
       fontSize: 16,
       color: CustomColors.defaultFontColor,
       fontWeight: FontWeight.bold);
-      static final defaultTextStyle2 = GoogleFonts.openSans(
-      fontSize: 16,
-      color: CustomColors.textColor,
-      );
+  static final defaultTextStyle2 = GoogleFonts.openSans(
+    fontSize: 16,
+    color: CustomColors.textColor,
+  );
   static final inputTextStyle2 = GoogleFonts.openSans(
       fontSize: 14, color: const Color.fromARGB(179, 255, 255, 255));
-
   static final titleStyle2 = GoogleFonts.openSans(
       fontSize: 32, fontWeight: FontWeight.bold, color: CustomColors.textColor);
   static final subtitleStyle2 = GoogleFonts.openSans(
       fontSize: 22, fontWeight: FontWeight.bold, color: CustomColors.textColor);
+      static final subtitleStyle3 = GoogleFonts.openSans(
+      fontSize: 18, fontWeight: FontWeight.bold, color: CustomColors.textColor);
   static final indexStyle = GoogleFonts.openSans(
       fontSize: 32,
       fontWeight: FontWeight.bold,
