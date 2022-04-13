@@ -9,11 +9,7 @@ class TimerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Icon(
-          Icons.timelapse_sharp,
-          size: 40,
-          color: CustomColors.indexColor,
-        ),
+        Image.asset('assets/time.png',scale: 4,),
         const SizedBox(
           height: 10,
         ),

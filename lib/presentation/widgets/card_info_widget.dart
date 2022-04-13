@@ -12,7 +12,7 @@ class CardInfo extends StatelessWidget {
   String title;
   String text;
   int index;
-  Icon? icon;
+  Image? icon;
 
   @override
   Widget build(BuildContext context) {

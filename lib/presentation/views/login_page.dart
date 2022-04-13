@@ -136,7 +136,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   ElevatedButton(
                     onPressed: (() {
-                      Navigator.of(context).pushNamed('/howToDo');
+                      Navigator.of(context).pushNamed('/homePage');
                       loginBloc.getUser(
                           email: textMailController.text,
                           password: textPasswordController.text);

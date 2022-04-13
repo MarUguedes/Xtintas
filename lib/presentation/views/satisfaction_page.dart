@@ -10,90 +10,102 @@ class SatisfactionPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      body: Container(
-        color: Colors.white,
-        child: Center(
-            child: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: SizedBox(
-            height: screenSize.height * 0.40,
-            child: Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(
-                    20,
-                  ),
-                  color: CustomColors.backgroungColor,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 2,
-                      offset: const Offset(0, 2),
-                      blurRadius: 4,
-                    )
-                  ]),
-              child: Padding(
-                padding: const EdgeInsets.only(top: 25.0, right: 10, left: 10),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        Strings.satisfactiontitle,
-                        style: CustomFont.subtitleStyle3,
+      body: Column(
+        children: [
+           Align(
+                  alignment: Alignment.topLeft,
+                  child: IconButton(
+                      onPressed: (() {
+                        Navigator.of(context).pushNamed('/loginPage');
+                      }),
+                      icon: const Icon(Icons.arrow_back_ios))),
+          Container(
+            color: Colors.white,
+            child: Center(
+                child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: SizedBox(
+                height: screenSize.height * 0.30,
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(
+                        20,
                       ),
-                      SizedBox(
-                        height: screenSize.height * 0.05,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      color: CustomColors.backgroungColor,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 2,
+                          offset: const Offset(0, 2),
+                          blurRadius: 4,
+                        )
+                      ]),
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 20.0, right: 10, left: 10),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Column(
-                            children: [
-                              IconButton(
-                                  iconSize: 60,
-                                  onPressed: () {},
-                                  icon: Image.asset('assets/sad.png')),
-                              const Text(Strings.badSatisfaction)
-                            ],
+                          Text(
+                            Strings.satisfactiontitle,
+                            style: CustomFont.subtitleStyle3,
                           ),
-                          Column(
+                          SizedBox(
+                            height: screenSize.height * 0.02,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              IconButton(
-                                iconSize: 60,
-                                onPressed: () {},
-                                icon: Image.asset('assets/boring.png'),
+                              Column(
+                                children: [
+                                  IconButton(
+                                      iconSize: 40,
+                                      onPressed: () {},
+                                      icon: Image.asset('assets/sad.png')),
+                                  const Text(Strings.badSatisfaction)
+                                ],
                               ),
-                              const Text(Strings.mediumSatisfaction)
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              IconButton(
-                                iconSize: 60,
-                                onPressed: () {},
-                                icon: Image.asset('assets/in-love.png'),
+                              Column(
+                                children: [
+                                  IconButton(
+                                    iconSize: 40,
+                                    onPressed: () {},
+                                    icon: Image.asset('assets/boring.png'),
+                                  ),
+                                  const Text(Strings.mediumSatisfaction)
+                                ],
                               ),
-                              const Text(Strings.goodatisfaction)
+                              Column(
+                                children: [
+                                  IconButton(
+                                    iconSize: 40,
+                                    onPressed: () {},
+                                    icon: Image.asset('assets/in-love.png'),
+                                  ),
+                                  const Text(Strings.goodatisfaction)
+                                ],
+                              ),
                             ],
                           ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: screenSize.height * 0.04,
-                      ),
-                      ElevatedButton(
-                          onPressed: (() {}),
-                          child: const Text(Strings.su),
-                          style: ElevatedButton.styleFrom(
-                            primary: CustomColors.backgroungLoginColor,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(32.0)),
-                            minimumSize: const Size(300, 50),
-                          ))
-                    ]),
+                          SizedBox(
+                            height: screenSize.height * 0.02,
+                          ),
+                          ElevatedButton(
+                              onPressed: (() {}),
+                              child: const Text(Strings.submitText),
+                              style: ElevatedButton.styleFrom(
+                                primary: CustomColors.backgroungLoginColor,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(32.0),
+                                ),
+                                minimumSize: const Size(250, 40),
+                              ))
+                        ]),
+                  ),
+                ),
               ),
-            ),
+            )),
           ),
-        )),
+        ],
       ),
     );
   }

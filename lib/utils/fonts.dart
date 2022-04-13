@@ -23,11 +23,19 @@ abstract class CustomFont {
   );
   static final inputTextStyle2 = GoogleFonts.openSans(
       fontSize: 14, color: const Color.fromARGB(179, 255, 255, 255));
+  static final buttonTextStyle = GoogleFonts.openSans(
+    fontSize: 13,
+  );
+
+  static final buttonTextStyle2 = GoogleFonts.openSans(
+      fontSize: 13,
+      fontWeight: FontWeight.bold,
+      color: Color.fromARGB(255, 255, 253, 253));
   static final titleStyle2 = GoogleFonts.openSans(
       fontSize: 32, fontWeight: FontWeight.bold, color: CustomColors.textColor);
   static final subtitleStyle2 = GoogleFonts.openSans(
       fontSize: 22, fontWeight: FontWeight.bold, color: CustomColors.textColor);
-      static final subtitleStyle3 = GoogleFonts.openSans(
+  static final subtitleStyle3 = GoogleFonts.openSans(
       fontSize: 18, fontWeight: FontWeight.bold, color: CustomColors.textColor);
   static final indexStyle = GoogleFonts.openSans(
       fontSize: 32,

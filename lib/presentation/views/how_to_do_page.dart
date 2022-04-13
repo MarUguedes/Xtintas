@@ -14,88 +14,99 @@ class HowToDoPAge extends StatelessWidget {
     return Scaffold(
         backgroundColor: CustomColors.backgroungColor,
         body: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.all(screenSize.width * 0.10),
-            child: Column(
-              children: [
-                Text(
-                  Strings.howToDoTitle,
-                  style: CustomFont.titleStyle2,
+          child: Column(
+            children: [
+              const SizedBox(height: 10),
+              Align(
+                alignment: Alignment.topLeft,
+                child: IconButton(
+                  onPressed: (() {
+                    Navigator.of(context).pushNamed('/homePage');
+                  }),
+                  icon: const Icon(Icons.arrow_back_ios),
                 ),
-                const SizedBox(
-                  height: 10,
+              ),
+              Padding(
+                padding: EdgeInsets.all(screenSize.width * 0.07),
+                child: Column(
+                  children: [
+                    Text(
+                      Strings.howToDoTitle,
+                      style: CustomFont.titleStyle2,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: screenSize.width * 0.70,
+                      height: 1,
+                      color: CustomColors.borderColor,
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    CardInfo(
+                      index: 1,
+                      title: Strings.stepOneTitle,
+                      text: Strings.stepOneText,
+                      icon: Image.asset(
+                        'assets/paint_bucket.png',
+                        scale: 5,
+                      ),
+                    ),
+                    CardInfo(
+                      index: 2,
+                      title: Strings.stepTwoTitle,
+                      text: Strings.stepTwoText,
+                      icon: Image.asset('assets/brush.png', scale: 2),
+                    ),
+                    const Icon(
+                      Icons.south,
+                      size: 50,
+                      color: CustomColors.borderColor,
+                    ),
+                    const SizedBox(
+                      height: 60,
+                    ),
+                    CardInfo(
+                      index: 3,
+                      title: Strings.stepThreeTitle,
+                      text: Strings.stepThreeText,
+                      icon: Image.asset('assets/brush.png', scale: 2),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const TimerWidget(),
+                    const SizedBox(
+                      height: 60,
+                    ),
+                    CardInfo(
+                      index: 5,
+                      title: Strings.stepFiveTitle,
+                      text: Strings.stepFiveText,
+                      icon: Image.asset('assets/brush.png', scale: 2),
+                    ),
+                    CardInfo(
+                      index: 6,
+                      title: Strings.stepSixTitle,
+                      text: Strings.stepSixText,
+                      icon: Image.asset('assets/brush.png', scale: 2),
+                    ),
+                    const TimerWidget(),
+                    const SizedBox(
+                      height: 60,
+                    ),
+                    CardInfo(
+                      index: 7,
+                      title: Strings.stepSevenTitle,
+                      text: Strings.stepSevenText,
+                    )
+                  ],
                 ),
-                Container(
-                  width: screenSize.width * 0.70,
-                  height: 1,
-                  color: CustomColors.borderColor,
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                CardInfo(
-                  index: 1,
-                  title: Strings.stepOneTitle,
-                  text: Strings.stepOneText
-                  
-                ,
-                  icon: const Icon(Icons.format_color_fill),
-                ),
-                CardInfo(
-                  index: 2,
-                  title: Strings.stepTwoTitle,
-                  text:
-                      Strings.stepTwoText,
-                  icon: const Icon(Icons.format_paint),
-                ),
-                const Icon(
-                  Icons.south,
-                  size: 60,
-                  color: CustomColors.borderColor,
-                ),
-                const SizedBox(
-                  height: 60,
-                ),
-                CardInfo(
-                  index: 3,
-                  title: Strings.stepThreeTitle,
-                  text: Strings.stepThreeText,
-                  icon: const Icon(Icons.format_paint),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const TimerWidget(),
-                const SizedBox(
-                  height: 60,
-                ),
-                CardInfo(
-                  index: 5,
-                  title: Strings.stepFiveTitle,
-                  text: Strings.stepFiveText,
-                  icon: const Icon(Icons.format_paint),
-                ),
-                CardInfo(
-                  index: 6,
-                  title: Strings.stepSixTitle,
-                  text:Strings.stepSixText,
-                  icon: const Icon(Icons.format_paint),
-                ),
-                const TimerWidget(),
-                const SizedBox(
-                  height: 60,
-                ),
-                CardInfo(
-                  index: 7,
-                  title: Strings.stepSevenTitle,
-                  text: Strings.stepSevenText,
-                )
-              ],
-            ),
+              ),
+            ],
           ),
         ));
   }
 }
-
-
-
