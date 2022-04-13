@@ -16,7 +16,7 @@ class HowToDoPAge extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              const SizedBox(height: 10),
+              const SizedBox(height: 20),
               Align(
                 alignment: Alignment.topLeft,
                 child: IconButton(

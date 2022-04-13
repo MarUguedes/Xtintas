@@ -3,11 +3,21 @@ import 'package:xtintas/utils/custom_colors.dart';
 import 'package:xtintas/utils/fonts.dart';
 
 class InkCard extends StatelessWidget {
-  const InkCard({Key? key, required this.isIndicator, required this.image, required this.name}) : super(key: key);
+  const InkCard(
+      {Key? key,
+      required this.pageController,
+      required this.pages,
+      required this.isIndicator,
+      required this.image,
+      required this.currentIndex,
+      required this.name})
+      : super(key: key);
   final bool isIndicator;
+  final currentIndex;
+  final pages;
   final String image;
   final String name;
-
+  final PageController pageController;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +35,7 @@ class InkCard extends StatelessWidget {
               blurRadius: 4,
             )
           ]),
-      height: 250,
+      height: 300,
       width: 300,
       child: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -50,26 +60,44 @@ class InkCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              const Icon(
-                Icons.arrow_back,
+              IconButton(
+                onPressed: () {
+                  if (currentIndex >0) {
+                    pageController.jumpToPage(currentIndex-1);
+                  } else {
+                    pageController.jumpToPage(pages-1);
+                  }
+                },
+                icon: const Icon(
+                  Icons.arrow_back,
+                  size: 40,
+                ),
                 color: CustomColors.borderColor,
-                size: 40,
               ),
               Image.network(
                 image,
                 scale: 8,
               ),
-              const Icon(
-                Icons.arrow_forward,
+              IconButton(
+                onPressed: (() {
+                  if (currentIndex < pages-1) {
+                    pageController.jumpToPage(currentIndex + 1);
+                  } else {
+                    pageController.jumpToPage(0);
+                  }
+                }),
+                icon: const Icon(
+                  Icons.arrow_forward,
+                  size: 40,
+                ),
                 color: CustomColors.borderColor,
-                size: 40,
               ),
             ],
           ),
           const SizedBox(
             height: 20,
           ),
-           Text('$name'),
+          Text(name,style: CustomFont.subtitleStyle3),
           const SizedBox(
             height: 20,
           ),

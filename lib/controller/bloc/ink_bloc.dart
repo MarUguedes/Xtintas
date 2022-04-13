@@ -5,6 +5,7 @@ import 'package:xtintas/models/ink.dart';
 class BlocInkState {
   final List<Ink> inks;
   final StatusInk status;
+  
 
   BlocInkState(this.inks, this.status);
   static BlocInkState get empty => BlocInkState([], StatusInk.empty);

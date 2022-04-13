@@ -35,6 +35,8 @@ abstract class CustomFont {
       fontSize: 32, fontWeight: FontWeight.bold, color: CustomColors.textColor);
   static final subtitleStyle2 = GoogleFonts.openSans(
       fontSize: 22, fontWeight: FontWeight.bold, color: CustomColors.textColor);
+       static final subtitleStyle = GoogleFonts.openSans(
+      fontSize: 14, fontWeight: FontWeight.bold, color: CustomColors.textColor);
   static final subtitleStyle3 = GoogleFonts.openSans(
       fontSize: 18, fontWeight: FontWeight.bold, color: CustomColors.textColor);
   static final indexStyle = GoogleFonts.openSans(

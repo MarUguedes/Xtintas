@@ -15,10 +15,13 @@ class DoubtPage extends StatelessWidget {
         height: screenSize.height,
         color: Colors.white,
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(10.0),
           child: Expanded(
             child: Column(
               children: [
+                SizedBox(
+                  height:20
+                ),
                 Align(
                   alignment: Alignment.topLeft,
                   child: IconButton(

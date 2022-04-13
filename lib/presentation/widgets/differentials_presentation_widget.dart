@@ -3,13 +3,18 @@ import 'package:xtintas/models/ink.dart';
 import 'package:xtintas/utils/custom_colors.dart';
 import 'package:xtintas/utils/fonts.dart';
 
-class DifferentialsCard extends StatelessWidget {
+class DifferentialsCard extends StatefulWidget {
   DifferentialsCard(
       {Key? key, required this.difereciais, required this.difereciaisIcons})
       : super(key: key);
   List<Benefits> difereciais;
   List<Benefits> difereciaisIcons;
 
+  @override
+  State<DifferentialsCard> createState() => _DifferentialsCardState();
+}
+
+class _DifferentialsCardState extends State<DifferentialsCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,29 +32,38 @@ class DifferentialsCard extends StatelessWidget {
             )
           ]),
       height: 170,
-      width: 300,
+      width: 350,
       child: Padding(
         padding: const EdgeInsets.all(10.0),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-          Text('Diferenciais',style: CustomFont.subtitleStyle3,),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+          Text(
+            'Diferenciais',
+            style: CustomFont.subtitleStyle,
+          ),
           const SizedBox(
-            height: 20,
+            height: 10,
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: difereciais.length,
-              itemBuilder: ((context, index) => Row(
-                    children: [
-                      Image.network(
-                        difereciais[index].icon!,
-                        scale: 12,
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Text('${difereciais[index].name}')
-                    ],
-                  )),
+              itemCount: widget.difereciais.length,
+              itemBuilder: ((context, index) => Padding(
+                padding: const EdgeInsets.only(bottom:4.0),
+                child: Row(
+                      children: [
+                        Image.network(
+                          widget.difereciais[index].icon!,
+                          scale: 15,
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Text('${widget.difereciais[index].name}')
+                      ],
+                    ),
+              )
+                  ),
             ),
           ),
           const SizedBox(height: 20),
