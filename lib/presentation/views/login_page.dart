@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:xtintas/controller/bloc/ink_bloc.dart';
 import 'package:xtintas/controller/bloc/login_bloc.dart';
 import 'package:xtintas/utils/custom_colors.dart';
 import 'package:xtintas/utils/fonts.dart';
@@ -22,12 +23,11 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
     final loginBloc = context.read<LoginBloc>();
     final screenSize = MediaQuery.of(context).size;
+    final blocInk = context.read<BlocInk>();
 
     return Scaffold(
       body: Container(
@@ -94,7 +94,6 @@ class _LoginPageState extends State<LoginPage> {
                         )),
                   ),
                   TextFormField(
-                   
                     controller: textMailController,
                     style: CustomFont.inputTextStyle,
                     decoration: const InputDecoration(
@@ -119,9 +118,10 @@ class _LoginPageState extends State<LoginPage> {
                     decoration: InputDecoration(
                       suffixIcon: IconButton(
                         icon: Icon(
-                          isObscured ? Icons.visibility_off : Icons.visibility,
-                          color: CustomColors.defaultFontColor
-                        ),
+                            isObscured
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                            color: CustomColors.defaultFontColor),
                         onPressed: setVisibility,
                       ),
                       filled: true,
@@ -136,22 +136,20 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   ElevatedButton(
                     onPressed: (() {
-                      Navigator.of(context).pushNamed('/homePage');
+                      blocInk.getInks();
+
                       loginBloc.getUser(
                           email: textMailController.text,
                           password: textPasswordController.text);
-                      print(
-                          '${textMailController.text}${textPasswordController.text}');
+                      Navigator.of(context).pushNamed('/homePage');
                     }),
                     child: Image.asset('assets/login_buttom.png'),
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                          CustomColors.buttomPrimaryColor),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50.0),
-                        ),
+                    style: ElevatedButton.styleFrom(
+                      primary: CustomColors.buttomPrimaryColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(32.0),
                       ),
+                      maximumSize: const Size(200, 70),
                     ),
                   ),
                   SizedBox(height: screenSize.height * 0.03),

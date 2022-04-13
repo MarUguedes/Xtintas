@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:xtintas/controller/bloc/ink_bloc.dart';
 import 'package:xtintas/controller/bloc/login_bloc.dart';
 import 'package:xtintas/presentation/views/doubt_page.dart';
 import 'package:xtintas/presentation/views/how_to_do_page.dart';
@@ -17,8 +18,12 @@ class XtintadApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => LoginBloc(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<LoginBloc>(create: ((context) => LoginBloc())),
+        BlocProvider<BlocInk>(create: ((context) => BlocInk(BlocInkState.empty)))
+      ],
+     
       child: MaterialApp(
         initialRoute:'/' ,
         routes: {

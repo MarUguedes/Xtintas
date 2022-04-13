@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+
 import 'package:xtintas/controller/repository/repository.dart';
 
 enum LoginStatus { success, loading, error, empty }
@@ -31,4 +32,5 @@ class LoginBloc extends Cubit<LoginBlocState> {
       emit(state.copyWith(loginStatus: LoginStatus.error));
     }
   }
+  
 }

@@ -10,13 +10,15 @@ class SatisfactionPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Column(
         children: [
            Align(
                   alignment: Alignment.topLeft,
                   child: IconButton(
+                    splashRadius: 20,
                       onPressed: (() {
-                        Navigator.of(context).pushNamed('/loginPage');
+                        Navigator.of(context).pushNamed('/homePage');
                       }),
                       icon: const Icon(Icons.arrow_back_ios))),
           Container(

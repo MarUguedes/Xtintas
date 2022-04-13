@@ -20,6 +20,7 @@ class HowToDoPAge extends StatelessWidget {
               Align(
                 alignment: Alignment.topLeft,
                 child: IconButton(
+                   splashRadius: 20,
                   onPressed: (() {
                     Navigator.of(context).pushNamed('/homePage');
                   }),
