@@ -31,10 +31,10 @@ class _DifferentialsCardState extends State<DifferentialsCard> {
               blurRadius: 4,
             )
           ]),
-      height: 170,
-      width: 350,
+      height: 150,
+      width: 270,
       child: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -46,6 +46,7 @@ class _DifferentialsCardState extends State<DifferentialsCard> {
             height: 10,
           ),
           Expanded(
+            
             child: ListView.builder(
               itemCount: widget.difereciais.length,
               itemBuilder: ((context, index) => Padding(
@@ -66,7 +67,7 @@ class _DifferentialsCardState extends State<DifferentialsCard> {
                   ),
             ),
           ),
-          const SizedBox(height: 20),
+          //const SizedBox(height: 20),
         ]),
       ),
     );

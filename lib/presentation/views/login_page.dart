@@ -152,7 +152,7 @@ class _LoginPageState extends State<LoginPage> {
                       maximumSize: const Size(200, 70),
                     ),
                   ),
-                  SizedBox(height: screenSize.height * 0.03),
+                  SizedBox(height: screenSize.height * 0.01),
                   Text(
                     "Esqueci a minha senha",
                     style: CustomFont.inputTextStyle2,

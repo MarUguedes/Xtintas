@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:xtintas/controller/bloc/ink_bloc.dart';
 import 'package:xtintas/utils/custom_colors.dart';
 import 'package:xtintas/utils/fonts.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class InkCard extends StatelessWidget {
   const InkCard(
@@ -21,6 +23,8 @@ class InkCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final blocInk = context.read<BlocInk>();
+    final screenSize = MediaQuery.of(context).size;
     return Container(
       decoration: BoxDecoration(
           color: CustomColors.cardColor,
@@ -35,8 +39,8 @@ class InkCard extends StatelessWidget {
               blurRadius: 4,
             )
           ]),
-      height: 300,
-      width: 300,
+      height: 285,
+      width: 350,
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
@@ -58,14 +62,17 @@ class InkCard extends StatelessWidget {
                 )
               : const SizedBox.shrink(),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconButton(
+                padding: EdgeInsets.all(0),
                 onPressed: () {
-                  if (currentIndex >0) {
-                    pageController.jumpToPage(currentIndex-1);
+                  if (currentIndex > 0) {
+                    pageController.jumpToPage(currentIndex - 1);
+                    blocInk.setCurrentPage(currentIndex - 1);
                   } else {
                     pageController.jumpToPage(pages-1);
+                    blocInk.setCurrentPage(pages-1);
                   }
                 },
                 icon: const Icon(
@@ -79,11 +86,14 @@ class InkCard extends StatelessWidget {
                 scale: 8,
               ),
               IconButton(
+                padding: EdgeInsets.all(0),
                 onPressed: (() {
-                  if (currentIndex < pages-1) {
+                  if (currentIndex < pages - 1) {
                     pageController.jumpToPage(currentIndex + 1);
+                    blocInk.setCurrentPage(currentIndex + 1);
                   } else {
                     pageController.jumpToPage(0);
+                    blocInk.setCurrentPage(0);
                   }
                 }),
                 icon: const Icon(
@@ -95,12 +105,10 @@ class InkCard extends StatelessWidget {
             ],
           ),
           const SizedBox(
-            height: 20,
+            height: 15,
           ),
-          Text(name,style: CustomFont.subtitleStyle3),
-          const SizedBox(
-            height: 20,
-          ),
+          Text(name, style: CustomFont.subtitleStyle3),
+          Expanded(child: SizedBox()),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -109,7 +117,7 @@ class InkCard extends StatelessWidget {
                     Navigator.of(context).pushNamed('/howToDo');
                   }),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    padding: const EdgeInsets.symmetric(vertical: 7),
                     child: Text(
                       'Como pintar',
                       style: CustomFont.buttonTextStyle2,
@@ -131,7 +139,7 @@ class InkCard extends StatelessWidget {
                   Navigator.of(context).pushNamed('/makeAQuestion');
                 }),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  padding: const EdgeInsets.symmetric(vertical: 7),
                   child: Text(
                     'Tirar dúvidas',
                     style: CustomFont.buttonTextStyle2,
@@ -147,7 +155,8 @@ class InkCard extends StatelessWidget {
                 ),
               ),
             ],
-          )
+          ),
+          SizedBox(height: 8,)
         ]),
       ),
     );

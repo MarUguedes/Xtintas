@@ -16,22 +16,25 @@ class DoubtPage extends StatelessWidget {
         color: Colors.white,
         child: Padding(
           padding: const EdgeInsets.all(10.0),
-          child: Expanded(
-            child: Column(
-              children: [
-                SizedBox(
-                  height:20
+          child: Column(
+            children: [
+              SizedBox(
+                height:20
+              ),
+              Align(
+                alignment: Alignment.topLeft,
+                child: IconButton(
+                  onPressed: (() {
+                    Navigator.of(context).pushNamed('/homePage');
+                  }),
+                  icon: const Icon(Icons.arrow_back_ios),
                 ),
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: IconButton(
-                    onPressed: (() {
-                      Navigator.of(context).pushNamed('/homePage');
-                    }),
-                    icon: const Icon(Icons.arrow_back_ios),
-                  ),
-                ),
-                Align(
+              ),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                  Align(
                     alignment: Alignment.bottomCenter,
                     child: Padding(
                       padding: const EdgeInsets.all(15.0),
@@ -99,9 +102,13 @@ class DoubtPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                    )),
-              ],
-            ),
+                    )
+                    ),
+              
+                ],),
+              )
+              
+            ],
           ),
         ),
       ),

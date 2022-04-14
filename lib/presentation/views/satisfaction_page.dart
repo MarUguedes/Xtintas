@@ -21,12 +21,15 @@ class SatisfactionPage extends StatelessWidget {
                         Navigator.of(context).pushNamed('/homePage');
                       }),
                       icon: const Icon(Icons.arrow_back_ios))),
-          Container(
-            color: Colors.white,
-            child: Center(
+
+              Expanded(
+                child: Column(
+                  mainAxisAlignment:MainAxisAlignment.center,
+                  children: [
+                     Center(
                 child: Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: SizedBox(
+                          padding: const EdgeInsets.all(15.0),
+                          child: SizedBox(
                 height: screenSize.height * 0.30,
                 child: Container(
                   decoration: BoxDecoration(
@@ -104,9 +107,14 @@ class SatisfactionPage extends StatelessWidget {
                         ]),
                   ),
                 ),
+                          ),
+                        )
+                        ),
+              
+                  ],
+                ),
               ),
-            )),
-          ),
+         
         ],
       ),
     );
