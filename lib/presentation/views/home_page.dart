@@ -61,68 +61,73 @@ class _HomePageState extends State<HomePage> {
                     const SizedBox(
                       height: 20,
                     ),
-                    if(state.status==StatusInk.loading) CircularProgressIndicator(),
-                    if (state.status==StatusInk.success)
-                     Expanded(
-                            child: PageView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: state.inks.length,
-                                controller: pageController,
-                                itemBuilder: ((context, index) {
-                                  var currentInk = state.inks[index];
+                    if (state.status == StatusInk.loading)
+                      const CircularProgressIndicator(),
+                    if (state.status == StatusInk.success)
+                      Expanded(
+                        child: PageView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: state.inks.length,
+                            controller: pageController,
+                            itemBuilder: ((context, index) {
+                              var currentInk = state.inks[index];
 
-                                  return Padding(
-                                    padding: const EdgeInsets.only(top:10.0, left:10, right: 10),
-                                    child: Column(
-                                      children: [
-                                        InkCard(
-                                            currentIndex: index,
-                                            pages: state.inks.length,
-                                            pageController: pageController,
-                                            isIndicator: true,
-                                            image: currentInk.image!,
-                                            name: currentInk.name!),
-                                      
-                                      ],
+                              return Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 10.0, left: 10, right: 10),
+                                child: Column(
+                                  children: [
+                                    InkCard(
+                                        currentIndex: index,
+                                        pages: state.inks.length,
+                                        pageController: pageController,
+                                        isIndicator: true,
+                                        image: currentInk.image!,
+                                        name: currentInk.name!),
+                                  ],
+                                ),
+                              );
+                            })),
+                      ),
+                    if (state.status == StatusInk.success)
+                      Column(
+                        children: [
+                          DifferentialsCard(
+                              difereciais:
+                                  state.inks[state.currentPage].benefits!,
+                              difereciaisIcons:
+                                  state.inks[state.currentPage].benefits!),
+                          const SizedBox(height: 40),
+                          ElevatedButton(
+                              onPressed: (() {
+                                Navigator.of(context)
+                                    .pushNamed('/satisfaction');
+                              }),
+                              child: SizedBox(
+                                width: 250,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Compre aqui',
+                                      style: CustomFont.buttonTextStyle2,
                                     ),
-                                  );
-                                })),
-                          )
-                        ,
-                     if (state.status==StatusInk.success)
-                        DifferentialsCard(
-                            difereciais:
-                                state.inks[state.currentPage].benefits!,
-                            difereciaisIcons:
-                                state.inks[state.currentPage].benefits!),
-                                const SizedBox(height:40),
-                   if (state.status==StatusInk.success) ElevatedButton(
-                        onPressed: (() {
-                          Navigator.of(context).pushNamed('/satisfaction');
-                        }),
-                        child: SizedBox(
-                          width: 250,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Compre aqui',
-                                style: CustomFont.buttonTextStyle2,
+                                    const SizedBox(
+                                      width: 5,
+                                    ),
+                                    const Icon(Icons.shopping_basket)
+                                  ],
+                                ),
                               ),
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              const Icon(Icons.shopping_basket)
-                            ],
-                          ),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          primary: CustomColors.backgroungLoginColor,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(32.0),
-                          ),
-                          minimumSize: const Size(100, 50),
-                        ))
+                              style: ElevatedButton.styleFrom(
+                                primary: CustomColors.backgroungLoginColor,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(32.0),
+                                ),
+                                minimumSize: const Size(100, 50),
+                              ))
+                        ],
+                      )
                   ],
                 );
               })),

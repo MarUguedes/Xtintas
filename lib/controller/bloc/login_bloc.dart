@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 
-import 'package:xtintas/controller/repository/repository.dart';
+import 'package:xtintas/controller/repository/login_repository.dart';
 
 enum LoginStatus { success, loading, error, empty }
 
