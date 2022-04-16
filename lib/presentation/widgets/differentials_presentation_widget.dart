@@ -17,6 +17,7 @@ class DifferentialsCard extends StatefulWidget {
 class _DifferentialsCardState extends State<DifferentialsCard> {
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
     return Container(
       decoration: BoxDecoration(
           color: CustomColors.cardColor,
@@ -31,8 +32,8 @@ class _DifferentialsCardState extends State<DifferentialsCard> {
               blurRadius: 4,
             )
           ]),
-      height: 150,
-      width: 270,
+      height: screenSize.height*0.20,
+      width: screenSize.width*0.82,
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -42,12 +43,10 @@ class _DifferentialsCardState extends State<DifferentialsCard> {
             'Diferenciais',
             style: CustomFont.subtitleStyle,
           ),
-          const SizedBox(
-            height: 10,
-          ),
+          
           Expanded(
-            
             child: ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
               itemCount: widget.difereciais.length,
               itemBuilder: ((context, index) => Padding(
                 padding: const EdgeInsets.only(bottom:4.0),
@@ -55,7 +54,7 @@ class _DifferentialsCardState extends State<DifferentialsCard> {
                       children: [
                         Image.network(
                           widget.difereciais[index].icon!,
-                          scale: 15,
+                          scale: 13,
                         ),
                         const SizedBox(
                           width: 10,
@@ -67,7 +66,7 @@ class _DifferentialsCardState extends State<DifferentialsCard> {
                   ),
             ),
           ),
-          //const SizedBox(height: 20),
+          
         ]),
       ),
     );

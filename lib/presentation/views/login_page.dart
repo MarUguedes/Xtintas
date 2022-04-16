@@ -49,14 +49,14 @@ class _LoginPageState extends State<LoginPage> {
         ),
         child: Stack(clipBehavior: Clip.none, children: [
           Positioned(
-            bottom: -300,
-            right: -100,
+            bottom: -screenSize.height*0.77,
+            right: -screenSize.width*0.73,
             child: Container(
-              height: 400,
-              width: 400,
+              height: 750,
+              width: 750,
               decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(200)),
-                  color: Color.fromARGB(150, 125, 109, 215)),
+                  borderRadius: BorderRadius.all(Radius.circular(600)),
+                  color: Color.fromARGB(109, 125, 109, 215)),
             ),
           ),
           Form(
@@ -166,9 +166,9 @@ class _LoginPageState extends State<LoginPage> {
                         if (_formkey.currentState!.validate()) {
                           bool hasLogin = await login();
                           if (hasLogin) {
-                            blocInk.getInks();
-                            Navigator.of(context)
-                                .pushNamedAndRemoveUntil('/homePage',ModalRoute.withName('/'));
+                           
+                            Navigator.of(context).pushNamedAndRemoveUntil(
+                                '/homePage', ModalRoute.withName('/'));
                           } else {
                             _textPasswordController.clear();
                             ScaffoldMessenger.of(context)
@@ -181,13 +181,13 @@ class _LoginPageState extends State<LoginPage> {
                             password: _textPasswordController.text);
                         //
                       }),
-                      child: Image.asset('assets/login_buttom.png'),
+                      child: Image.asset('assets/login_buttom.png',semanticLabel: 'Botão de login',),
                       style: ElevatedButton.styleFrom(
                         primary: CustomColors.buttomPrimaryColor,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(32.0),
                         ),
-                        maximumSize: const Size(200, 70),
+                        minimumSize: const Size(180, 35),
                       ),
                     ),
                     SizedBox(height: screenSize.height * 0.01),
@@ -221,10 +221,10 @@ class _LoginPageState extends State<LoginPage> {
     });
     final token = jsonDecode(response.body)['access-token'];
 
-    print(response.body);
-    print(response.statusCode);
+  
     if (response.statusCode == 201) {
-      print(token);
+     await sharedPreferences.setString('token',"Token $token");
+   
 
       return true;
     }

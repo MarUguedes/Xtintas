@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xtintas/presentation/views/home_page.dart';
 import 'package:xtintas/presentation/views/login_page.dart';
+
+import '../../controller/bloc/ink_bloc.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({Key? key}) : super(key: key);
@@ -16,28 +19,22 @@ class _AuthPageState extends State<AuthPage> {
     super.initState();
     verifyToken().then((value) {
       if (value) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: ((context) => const HomePage()),
-          ),
-        );
+         Navigator.of(context)
+             .pushNamedAndRemoveUntil('/homePage', ModalRoute.withName('/'));
+        //Navigator.of(context).pushReplacementNamed('homePage');
       } else {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: ((context) => const LoginPage()),
-          ),
-        );
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil('/', ModalRoute.withName('/authPage'));
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    final blocInk = context.read<BlocInk>();
+    return Scaffold(
       body: Center(
-        child: CircularProgressIndicator(),
+        child: Container(),
       ),
     );
   }
@@ -45,10 +42,10 @@ class _AuthPageState extends State<AuthPage> {
   Future<bool> verifyToken() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
-    if (sharedPreferences.getString('token') != null) {
-      return true;
-    } else {
+    if (sharedPreferences.getString('token') == null) {
       return false;
+    } else {
+      return true;
     }
   }
 }

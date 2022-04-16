@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/link.dart';
 import 'package:xtintas/controller/bloc/ink_bloc.dart';
 import 'package:xtintas/presentation/widgets/differentials_presentation_widget.dart';
 import 'package:xtintas/presentation/widgets/ink_presentation_widget.dart';
@@ -6,6 +8,7 @@ import 'package:xtintas/utils/custom_colors.dart';
 import 'package:xtintas/utils/fonts.dart';
 import 'package:xtintas/utils/strings.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -20,32 +23,43 @@ class _HomePageState extends State<HomePage> {
   var currentIndex = 0;
 
   @override
+  void initState() {
+    final blocInk = context.read<BlocInk>();
+    blocInk.getInks();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    final blocInk = context.read<BlocInk>();
+
     return Scaffold(
         backgroundColor: CustomColors.backgroungColor,
         body: SizedBox(
           width: screenSize.width,
           height: screenSize.height,
           child: Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.only(top: 20.0),
               child:
                   BlocBuilder<BlocInk, BlocInkState>(builder: (context, state) {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const SizedBox(height: 15),
                     Align(
-                      alignment: Alignment.topLeft,
-                      child: IconButton(
-                        splashRadius: 20,
-                        onPressed: (() {
-                          Navigator.of(context).pushNamed('/');
-                        }),
-                        icon: const Icon(Icons.arrow_back_ios),
-                      ),
-                    ),
+                        alignment: Alignment.topRight,
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 8.0),
+                          child: IconButton(
+                            icon: const Icon(Icons.logout),
+                            onPressed: () async {
+                              bool leave = await logout();
+                              if (leave) {
+                                Navigator.of(context).pushNamedAndRemoveUntil('/', ModalRoute.withName('/homePage'));
+                              }
+                            },
+                          ),
+                        )),
+                    const SizedBox(height: 15),
                     Text(
                       Strings.page2Title,
                       style: CustomFont.subtitleStyle2,
@@ -97,40 +111,63 @@ class _HomePageState extends State<HomePage> {
                                   state.inks[state.currentPage].benefits!,
                               difereciaisIcons:
                                   state.inks[state.currentPage].benefits!),
-                          const SizedBox(height: 40),
-                          ElevatedButton(
-                              onPressed: (() {
-                                Navigator.of(context)
-                                    .pushNamed('/satisfaction');
-                              }),
-                              child: SizedBox(
-                                width: 250,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'Compre aqui',
-                                      style: CustomFont.buttonTextStyle2,
-                                    ),
-                                    const SizedBox(
-                                      width: 5,
-                                    ),
-                                    const Icon(Icons.shopping_basket)
-                                  ],
+                          SizedBox(height: screenSize.height * 0.10),
+                          //Flexible(child: SizedBox()),
+                          Link(
+                            target: LinkTarget.blank,
+                            uri: Uri.parse('https://pub.dev'),
+                            builder: (context, followLink) => ElevatedButton(
+                                onPressed: (() {
+                                  //followLink;
+                                  Navigator.of(context)
+                                      .pushNamed('/satisfaction');
+                                }),
+                                child: SizedBox(
+                                  width: 250,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Compre aqui',
+                                        style: CustomFont.buttonTextStyle2,
+                                      ),
+                                      const SizedBox(
+                                        width: 5,
+                                      ),
+                                      const Icon(Icons.shopping_basket)
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                primary: CustomColors.backgroungLoginColor,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(32.0),
-                                ),
-                                minimumSize: const Size(100, 50),
-                              ))
+                                style: ElevatedButton.styleFrom(
+                                  primary: CustomColors.backgroungLoginColor,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(32.0),
+                                  ),
+                                  minimumSize: const Size(100, 50),
+                                )),
+                          ),
+                          const SizedBox(
+                            height: 50,
+                          ),
                         ],
                       )
                   ],
                 );
               })),
         ));
+  }
+
+  void _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  Future<bool> logout() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    await sharedPreferences.clear();
+    return true;
   }
 }

@@ -39,8 +39,8 @@ class InkCard extends StatelessWidget {
               blurRadius: 4,
             )
           ]),
-      height: 285,
-      width: 350,
+      height: screenSize.height * 0.37,
+      width: screenSize.width * 0.91,
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
@@ -65,14 +65,15 @@ class InkCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconButton(
-                padding: EdgeInsets.all(0),
+                padding: const EdgeInsets.all(0),
                 onPressed: () {
                   if (currentIndex > 0) {
+                    
                     pageController.jumpToPage(currentIndex - 1);
                     blocInk.setCurrentPage(currentIndex - 1);
                   } else {
-                    pageController.jumpToPage(pages-1);
-                    blocInk.setCurrentPage(pages-1);
+                    pageController.jumpToPage(pages - 1);
+                    blocInk.setCurrentPage(pages - 1);
                   }
                 },
                 icon: const Icon(
@@ -86,7 +87,7 @@ class InkCard extends StatelessWidget {
                 scale: 8,
               ),
               IconButton(
-                padding: EdgeInsets.all(0),
+                padding: const EdgeInsets.all(0),
                 onPressed: (() {
                   if (currentIndex < pages - 1) {
                     pageController.jumpToPage(currentIndex + 1);
@@ -107,8 +108,8 @@ class InkCard extends StatelessWidget {
           const SizedBox(
             height: 15,
           ),
-          Text(name, style: CustomFont.subtitleStyle3),
-          Expanded(child: SizedBox()),
+          Text(name, style: CustomFont.subtitleStyle3, textAlign: TextAlign.center,),
+          const Expanded(child: SizedBox()),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -156,7 +157,9 @@ class InkCard extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 8,)
+          const SizedBox(
+            height: 8,
+          )
         ]),
       ),
     );

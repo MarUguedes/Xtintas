@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:xtintas/controller/bloc/doubt_bloc.dart';
+import 'package:xtintas/controller/bloc/feedback_bloc.dart';
 import 'package:xtintas/controller/bloc/ink_bloc.dart';
 import 'package:xtintas/controller/bloc/login_bloc.dart';
 import 'package:xtintas/presentation/views/auth_page.dart';
@@ -21,8 +23,12 @@ class XtintadApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        
         BlocProvider<LoginBloc>(create: ((context) => LoginBloc())),
-        BlocProvider<BlocInk>(create: ((context) => BlocInk(BlocInkState.empty)))
+        BlocProvider<BlocInk>(create: ((context) => BlocInk(BlocInkState.empty))),
+        BlocProvider<FeedbackBloc>(create:(context)=> FeedbackBloc()),
+         BlocProvider<DoubtBloc>(create: ((context) => DoubtBloc())),
+        
       ],
      
       child: MaterialApp(
