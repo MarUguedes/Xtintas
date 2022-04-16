@@ -54,7 +54,8 @@ class _HomePageState extends State<HomePage> {
                             onPressed: () async {
                               bool leave = await logout();
                               if (leave) {
-                                Navigator.of(context).pushNamedAndRemoveUntil('/', ModalRoute.withName('/homePage'));
+                                Navigator.of(context).pushNamedAndRemoveUntil(
+                                    '/', ModalRoute.withName('/homePage'));
                               }
                             },
                           ),
@@ -80,6 +81,8 @@ class _HomePageState extends State<HomePage> {
                     if (state.status == StatusInk.success)
                       Expanded(
                         child: PageView.builder(
+                            //
+                           physics: NeverScrollableScrollPhysics(),
                             scrollDirection: Axis.horizontal,
                             itemCount: state.inks.length,
                             controller: pageController,
@@ -112,16 +115,12 @@ class _HomePageState extends State<HomePage> {
                               difereciaisIcons:
                                   state.inks[state.currentPage].benefits!),
                           SizedBox(height: screenSize.height * 0.10),
-                          //Flexible(child: SizedBox()),
                           Link(
                             target: LinkTarget.blank,
-                            uri: Uri.parse('https://pub.dev'),
+                            uri: Uri.parse(
+                                '${state.inks[state.currentPage].buyUrl}'),
                             builder: (context, followLink) => ElevatedButton(
-                                onPressed: (() {
-                                  //followLink;
-                                  Navigator.of(context)
-                                      .pushNamed('/satisfaction');
-                                }),
+                                onPressed: followLink,
                                 child: SizedBox(
                                   width: 250,
                                   child: Row(
@@ -155,14 +154,6 @@ class _HomePageState extends State<HomePage> {
                 );
               })),
         ));
-  }
-
-  void _launchURL(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
   }
 
   Future<bool> logout() async {

@@ -68,11 +68,14 @@ class InkCard extends StatelessWidget {
                 padding: const EdgeInsets.all(0),
                 onPressed: () {
                   if (currentIndex > 0) {
-                    
-                    pageController.jumpToPage(currentIndex - 1);
+                    pageController.animateToPage(currentIndex - 1,
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeIn);
                     blocInk.setCurrentPage(currentIndex - 1);
                   } else {
-                    pageController.jumpToPage(pages - 1);
+                    pageController.animateToPage(pages - 1,
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeIn);
                     blocInk.setCurrentPage(pages - 1);
                   }
                 },
@@ -90,10 +93,14 @@ class InkCard extends StatelessWidget {
                 padding: const EdgeInsets.all(0),
                 onPressed: (() {
                   if (currentIndex < pages - 1) {
-                    pageController.jumpToPage(currentIndex + 1);
+                    pageController.animateToPage(currentIndex + 1,
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeIn);
                     blocInk.setCurrentPage(currentIndex + 1);
                   } else {
-                    pageController.jumpToPage(0);
+                    pageController.animateToPage(0,
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeIn);
                     blocInk.setCurrentPage(0);
                   }
                 }),
@@ -108,7 +115,11 @@ class InkCard extends StatelessWidget {
           const SizedBox(
             height: 15,
           ),
-          Text(name, style: CustomFont.subtitleStyle3, textAlign: TextAlign.center,),
+          Text(
+            name,
+            style: CustomFont.subtitleStyle3,
+            textAlign: TextAlign.center,
+          ),
           const Expanded(child: SizedBox()),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
