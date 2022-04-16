@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xtintas/controller/repository/doubt_repository.dart';
-import 'package:xtintas/controller/repository/feedback_repository.dart';
+import 'package:xtintas/controller/repository/satisfaction_repository.dart';
 
 class DoubtBlocState {
   final String question;

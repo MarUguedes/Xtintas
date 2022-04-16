@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xtintas/utils/custom_colors.dart';
 import 'package:xtintas/utils/fonts.dart';
 import 'package:xtintas/utils/strings.dart';
-import '../../controller/bloc/feedback_bloc.dart';
+import '../../controller/bloc/satisfaction_bloc.dart';
 
 class SatisfactionPage extends StatelessWidget {
   const SatisfactionPage({Key? key}) : super(key: key);
@@ -19,7 +19,7 @@ class SatisfactionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    final feedbackBloc = context.read<FeedbackBloc>();
+    final satisfactionBloc = context.read<SatisfactionBloc>();
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
@@ -78,7 +78,7 @@ class SatisfactionPage extends StatelessWidget {
                                       IconButton(
                                           iconSize: 40,
                                           onPressed: (() {
-                                            feedbackBloc.getRating(1);
+                                            satisfactionBloc.getRating(1);
                                           }),
                                           icon: Image.asset('assets/sad.png')),
                                       const Text(Strings.badSatisfaction)
@@ -89,7 +89,7 @@ class SatisfactionPage extends StatelessWidget {
                                       IconButton(
                                         iconSize: 40,
                                         onPressed: () {
-                                          feedbackBloc.getRating(2);
+                                          satisfactionBloc.getRating(2);
                                         },
                                         icon: Image.asset('assets/boring.png'),
                                       ),
@@ -101,7 +101,7 @@ class SatisfactionPage extends StatelessWidget {
                                       IconButton(
                                         iconSize: 40,
                                         onPressed: () {
-                                          feedbackBloc.getRating(3);
+                                          satisfactionBloc.getRating(3);
                                         },
                                         icon: Image.asset('assets/in-love.png'),
                                       ),
@@ -113,17 +113,17 @@ class SatisfactionPage extends StatelessWidget {
                               SizedBox(
                                 height: screenSize.height * 0.02,
                               ),
-                              BlocBuilder<FeedbackBloc, FeedbackBlocState>(
+                              BlocBuilder<SatisfactionBloc, SatisfactionBlocState>(
                                   builder: ((context, state) {
                                 return ElevatedButton(
                                     onPressed: (() async{
                                       if (state.satisfaction >= 1 ||
                                           state.satisfaction <= 3) {
-                                            final apiResponse= await feedbackBloc.postRating();
+                                            final apiResponse= await satisfactionBloc.postRating();
                                        
                                         ScaffoldMessenger.of(context).showSnackBar(showSnackBar(apiResponse));
 
-                                        feedbackBloc.getRating(0);// para zerar o estado 
+                                        satisfactionBloc.getRating(0);// para zerar o estado 
                                         Navigator.of(context)
                                             .pushNamed('/homePage');
                                       }else{

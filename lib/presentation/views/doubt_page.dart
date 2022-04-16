@@ -103,8 +103,10 @@ class DoubtPage extends StatelessWidget {
                                           onPressed: (() async{
                                             final question = controller.text;
                                             if (question.isNotEmpty) {
+                                              FocusScopeNode currentFocus = FocusScope.of(context);
                                               blocDoubt.getQuestion(controller.text);
                                              final response= await blocDoubt.postQuestion();
+                                             
 
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(showSnackBar('$response'));
