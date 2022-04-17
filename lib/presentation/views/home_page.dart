@@ -54,8 +54,7 @@ class _HomePageState extends State<HomePage> {
                             onPressed: () async {
                               bool leave = await logout();
                               if (leave) {
-                                Navigator.of(context).pushNamedAndRemoveUntil(
-                                    '/', ModalRoute.withName('/homePage'));
+                                Navigator.of(context).pushReplacementNamed('/');
                               }
                             },
                           ),
@@ -82,7 +81,7 @@ class _HomePageState extends State<HomePage> {
                       Expanded(
                         child: PageView.builder(
                             //
-                           physics: NeverScrollableScrollPhysics(),
+                            physics: NeverScrollableScrollPhysics(),
                             scrollDirection: Axis.horizontal,
                             itemCount: state.inks.length,
                             controller: pageController,

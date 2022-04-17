@@ -43,7 +43,6 @@ class _DifferentialsCardState extends State<DifferentialsCard> {
             'Diferenciais',
             style: CustomFont.subtitleStyle,
           ),
-          
           Expanded(
             child: ListView.builder(
               physics: NeverScrollableScrollPhysics(),

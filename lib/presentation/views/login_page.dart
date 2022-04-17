@@ -49,8 +49,8 @@ class _LoginPageState extends State<LoginPage> {
         ),
         child: Stack(clipBehavior: Clip.none, children: [
           Positioned(
-            bottom: -screenSize.height*0.77,
-            right: -screenSize.width*0.73,
+            bottom: -screenSize.height * 0.77,
+            right: -screenSize.width * 0.73,
             child: Container(
               height: 750,
               width: 750,
@@ -163,12 +163,14 @@ class _LoginPageState extends State<LoginPage> {
                     ElevatedButton(
                       onPressed: (() async {
                         FocusScopeNode currentFocus = FocusScope.of(context);
+                        loginBloc.getUser(
+                            email: _textMailController.text,
+                            password: _textPasswordController.text);
                         if (_formkey.currentState!.validate()) {
-                          bool hasLogin = await login();
+                          bool hasLogin = await loginBloc.login();
                           if (hasLogin) {
-                           
-                            Navigator.of(context).pushNamedAndRemoveUntil(
-                                '/homePage', ModalRoute.withName('/'));
+                            Navigator.of(context)
+                                .pushReplacementNamed('/homePage');
                           } else {
                             _textPasswordController.clear();
                             ScaffoldMessenger.of(context)
@@ -181,7 +183,10 @@ class _LoginPageState extends State<LoginPage> {
                             password: _textPasswordController.text);
                         //
                       }),
-                      child: Image.asset('assets/login_buttom.png',semanticLabel: 'Botão de login',),
+                      child: Image.asset(
+                        'assets/login_buttom.png',
+                        semanticLabel: 'Botão de login',
+                      ),
                       style: ElevatedButton.styleFrom(
                         primary: CustomColors.buttomPrimaryColor,
                         shape: RoundedRectangleBorder(
@@ -211,23 +216,5 @@ class _LoginPageState extends State<LoginPage> {
     textAlign: TextAlign.center,
   ));
 
-  Future<bool> login() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-
-    var url = Uri.parse('https://62546fae19bc53e2347e8008.mockapi.io/login');
-    var response = await http.post(url, body: {
-      "email": _textMailController.text,
-      "password": _textPasswordController.text,
-    });
-    final token = jsonDecode(response.body)['access-token'];
-
-  
-    if (response.statusCode == 201) {
-     await sharedPreferences.setString('token',"Token $token");
-   
-
-      return true;
-    }
-    return false;
-  }
+ 
 }

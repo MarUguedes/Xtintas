@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:xtintas/controller/repository/login_repository.dart';
 
@@ -25,12 +26,19 @@ class LoginBloc extends Cubit<LoginBlocState> {
 
   void getUser({required String email, required String password}) async {
     emit(state.copyWith(loginStatus: LoginStatus.loading));
+  }
+
+  Future<bool> login() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
     try {
-      final response = await authRepository.getAuth(email, password);
+      final token = authRepository.getAuth(state.email, state.password);
+      await sharedPreferences.setString('token', "Token $token");
       emit(state.copyWith(loginStatus: LoginStatus.success));
+      return true;
     } catch (error) {
       emit(state.copyWith(loginStatus: LoginStatus.error));
+      return false;
     }
   }
-  
 }
