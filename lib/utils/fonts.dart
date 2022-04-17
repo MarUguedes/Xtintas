@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:xtintas/utils/custom_colors.dart';
 
-abstract class CustomFont {
+abstract class CustomFontStyle {
   static final titleStyle = GoogleFonts.openSans(
       fontWeight: FontWeight.bold,
       fontSize: 36,

@@ -32,7 +32,7 @@ class SatisfactionPage extends StatelessWidget {
                   onPressed: (() {
                     Navigator.of(context).pushNamed('/homePage');
                   }),
-                  icon: const Icon(Icons.arrow_back_ios))),
+                  icon: const Icon(Icons.arrow_back_ios, semanticLabel: 'Voltar para a tela inicial',))),
           Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -64,7 +64,7 @@ class SatisfactionPage extends StatelessWidget {
                             children: [
                               Text(
                                 Strings.satisfactiontitle,
-                                style: CustomFont.subtitleStyle3,
+                                style: CustomFontStyle.subtitleStyle3,semanticsLabel: 'Avalie a sua satisfação',
                               ),
                               SizedBox(
                                 height: screenSize.height * 0.02,
@@ -76,6 +76,7 @@ class SatisfactionPage extends StatelessWidget {
                                   Column(
                                     children: [
                                       IconButton(
+                                        tooltip: 'Fraca',
                                           iconSize: 40,
                                           onPressed: (() {
                                             satisfactionBloc.getRating(1);
@@ -87,6 +88,7 @@ class SatisfactionPage extends StatelessWidget {
                                   Column(
                                     children: [
                                       IconButton(
+                                         tooltip: 'Mediana',
                                         iconSize: 40,
                                         onPressed: () {
                                           satisfactionBloc.getRating(2);
@@ -99,6 +101,7 @@ class SatisfactionPage extends StatelessWidget {
                                   Column(
                                     children: [
                                       IconButton(
+                                         tooltip: 'Ótima',
                                         iconSize: 40,
                                         onPressed: () {
                                           satisfactionBloc.getRating(3);

@@ -22,14 +22,14 @@ class CardInfo extends StatelessWidget {
           children: [
             Text(
               '$index',
-              style: CustomFont.indexStyle,
+              style: CustomFontStyle.indexStyle,
             ),
             const SizedBox(
               width: 8,
             ),
             Text(
               title,
-              style: CustomFont.subtitleStyle2,
+              style: CustomFontStyle.subtitleStyle2,
             ),
             const SizedBox(
               width: 15,
@@ -44,7 +44,7 @@ class CardInfo extends StatelessWidget {
             child: Text(
               text,
              
-              style: CustomFont.defaultTextStyle2,
+              style: CustomFontStyle.defaultTextStyle2,
             ),
           ),
         ),

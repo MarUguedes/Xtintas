@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:xtintas/models/ink.dart';
 import 'package:xtintas/utils/custom_colors.dart';
 import 'package:xtintas/utils/fonts.dart';
+import 'package:xtintas/utils/strings.dart';
 
 class DifferentialsCard extends StatefulWidget {
   DifferentialsCard(
@@ -32,28 +33,28 @@ class _DifferentialsCardState extends State<DifferentialsCard> {
               blurRadius: 4,
             )
           ]),
-      height: screenSize.height*0.20,
-      width: screenSize.width*0.82,
+      height: screenSize.height * 0.20,
+      width: screenSize.width * 0.82,
       child: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(
-            'Diferenciais',
-            style: CustomFont.subtitleStyle,
+            Strings.diferencialsTitle,
+            style: CustomFontStyle.subtitleStyle,
           ),
           Expanded(
             child: ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: widget.difereciais.length,
               itemBuilder: ((context, index) => Padding(
-                padding: const EdgeInsets.only(bottom:4.0),
-                child: Row(
+                    padding: const EdgeInsets.only(bottom: 4.0),
+                    child: Row(
                       children: [
                         Image.network(
                           widget.difereciais[index].icon!,
                           scale: 13,
+                          semanticLabel:
+                              ' Icone do diferêncial',
                         ),
                         const SizedBox(
                           width: 10,
@@ -61,11 +62,9 @@ class _DifferentialsCardState extends State<DifferentialsCard> {
                         Text('${widget.difereciais[index].name}')
                       ],
                     ),
-              )
-                  ),
+                  )),
             ),
           ),
-          
         ]),
       ),
     );

@@ -20,6 +20,7 @@ class HowToDoPAge extends StatelessWidget {
               Align(
                 alignment: Alignment.topLeft,
                 child: IconButton(
+                  tooltip: 'Voltar para a tela inicial',
                    splashRadius: 20,
                   onPressed: (() {
                     Navigator.of(context).pushNamed('/homePage');
@@ -33,7 +34,7 @@ class HowToDoPAge extends StatelessWidget {
                   children: [
                     Text(
                       Strings.howToDoTitle,
-                      style: CustomFont.titleStyle2,
+                      style: CustomFontStyle.titleStyle2,
                     ),
                     const SizedBox(
                       height: 10,

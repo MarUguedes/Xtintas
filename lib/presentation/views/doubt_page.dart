@@ -34,8 +34,9 @@ class DoubtPage extends StatelessWidget {
               Align(
                 alignment: Alignment.topLeft,
                 child: IconButton(
+                  tooltip: 'voltar para a tela inicial',
                   onPressed: (() {
-                    Navigator.of(context).pushNamed('/homePage');
+                    Navigator.of(context).pushReplacementNamed('/homePage');
                   }),
                   icon: const Icon(Icons.arrow_back_ios),
                 ),
@@ -76,7 +77,7 @@ class DoubtPage extends StatelessWidget {
                                             const EdgeInsets.only(bottom: 5.0),
                                         child: Text(
                                           Strings.makeAQuestion,
-                                          style: CustomFont.subtitleStyle3,
+                                          style: CustomFontStyle.subtitleStyle3,
                                         ),
                                       ),
                                       Padding(

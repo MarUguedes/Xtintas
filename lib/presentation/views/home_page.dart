@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/link.dart';
 import 'package:xtintas/controller/bloc/ink_bloc.dart';
+import 'package:xtintas/controller/bloc/login_bloc.dart';
 import 'package:xtintas/presentation/widgets/differentials_presentation_widget.dart';
 import 'package:xtintas/presentation/widgets/ink_presentation_widget.dart';
 import 'package:xtintas/utils/custom_colors.dart';
@@ -32,6 +33,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
+    final loginBloc = context.read<LoginBloc>();
 
     return Scaffold(
         backgroundColor: CustomColors.backgroungColor,
@@ -50,11 +52,14 @@ class _HomePageState extends State<HomePage> {
                         child: Padding(
                           padding: const EdgeInsets.only(right: 8.0),
                           child: IconButton(
+                            tooltip: 'Fazer logout',
                             icon: const Icon(Icons.logout),
                             onPressed: () async {
-                              bool leave = await logout();
+                              bool leave = await loginBloc.logout();
                               if (leave) {
-                                Navigator.of(context).pushReplacementNamed('/');
+                                Navigator.of(context)
+                                    .pushReplacementNamed('/loginPage');
+                                
                               }
                             },
                           ),
@@ -62,7 +67,7 @@ class _HomePageState extends State<HomePage> {
                     const SizedBox(height: 15),
                     Text(
                       Strings.page2Title,
-                      style: CustomFont.subtitleStyle2,
+                      style: CustomFontStyle.subtitleStyle2,
                     ),
                     const SizedBox(
                       height: 10,
@@ -81,7 +86,7 @@ class _HomePageState extends State<HomePage> {
                       Expanded(
                         child: PageView.builder(
                             //
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             scrollDirection: Axis.horizontal,
                             itemCount: state.inks.length,
                             controller: pageController,
@@ -114,36 +119,33 @@ class _HomePageState extends State<HomePage> {
                               difereciaisIcons:
                                   state.inks[state.currentPage].benefits!),
                           SizedBox(height: screenSize.height * 0.10),
-                          Link(
-                            target: LinkTarget.blank,
-                            uri: Uri.parse(
-                                '${state.inks[state.currentPage].buyUrl}'),
-                            builder: (context, followLink) => ElevatedButton(
-                                onPressed: followLink,
-                                child: SizedBox(
-                                  width: 250,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'Compre aqui',
-                                        style: CustomFont.buttonTextStyle2,
-                                      ),
-                                      const SizedBox(
-                                        width: 5,
-                                      ),
-                                      const Icon(Icons.shopping_basket)
-                                    ],
-                                  ),
+                          ElevatedButton(
+                              onPressed: (() => _openLink(
+                                  url:
+                                      '${state.inks[state.currentPage].buyUrl}')),
+                              child: SizedBox(
+                                width: 250,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Compre aqui',
+                                      style: CustomFontStyle.buttonTextStyle2,
+                                    ),
+                                    const SizedBox(
+                                      width: 5,
+                                    ),
+                                    const Icon(Icons.shopping_basket)
+                                  ],
                                 ),
-                                style: ElevatedButton.styleFrom(
-                                  primary: CustomColors.backgroungLoginColor,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(32.0),
-                                  ),
-                                  minimumSize: const Size(100, 50),
-                                )),
-                          ),
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                primary: CustomColors.backgroungLoginColor,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(32.0),
+                                ),
+                                minimumSize: const Size(100, 50),
+                              )),
                           const SizedBox(
                             height: 50,
                           ),
@@ -155,9 +157,12 @@ class _HomePageState extends State<HomePage> {
         ));
   }
 
-  Future<bool> logout() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    await sharedPreferences.clear();
-    return true;
+  void _openLink({required String url}) async {
+    if (await canLaunch(url)) {
+      launch(url, forceWebView: false);
+      Navigator.of(context).pushNamed('/satisfaction');
+    } 
   }
+
+
 }

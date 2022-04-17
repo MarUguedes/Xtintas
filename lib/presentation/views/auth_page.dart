@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:xtintas/presentation/views/home_page.dart';
-import 'package:xtintas/presentation/views/login_page.dart';
-
 import '../../controller/bloc/ink_bloc.dart';
 
 class AuthPage extends StatefulWidget {
@@ -19,12 +16,9 @@ class _AuthPageState extends State<AuthPage> {
     super.initState();
     verifyToken().then((value) {
       if (value) {
-         Navigator.of(context)
-             .pushNamedAndRemoveUntil('/homePage', ModalRoute.withName('/'));
-        //Navigator.of(context).pushReplacementNamed('homePage');
+        Navigator.of(context).pushReplacementNamed('/homePage');
       } else {
-        Navigator.of(context)
-            .pushNamedAndRemoveUntil('/', ModalRoute.withName('/authPage'));
+        Navigator.of(context).pushReplacementNamed('/loginPage');
       }
     });
   }
@@ -32,9 +26,9 @@ class _AuthPageState extends State<AuthPage> {
   @override
   Widget build(BuildContext context) {
     final blocInk = context.read<BlocInk>();
-    return Scaffold(
+    return const Scaffold(
       body: Center(
-        child: Container(),
+        child: CircularProgressIndicator(),
       ),
     );
   }

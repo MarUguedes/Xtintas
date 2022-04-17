@@ -3,6 +3,7 @@ import 'package:xtintas/controller/bloc/ink_bloc.dart';
 import 'package:xtintas/utils/custom_colors.dart';
 import 'package:xtintas/utils/fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:xtintas/utils/strings.dart';
 
 class InkCard extends StatelessWidget {
   const InkCard(
@@ -15,8 +16,8 @@ class InkCard extends StatelessWidget {
       required this.name})
       : super(key: key);
   final bool isIndicator;
-  final currentIndex;
-  final pages;
+  final int currentIndex;
+  final int pages;
   final String image;
   final String name;
   final PageController pageController;
@@ -49,13 +50,16 @@ class InkCard extends StatelessWidget {
                   alignment: Alignment.topRight,
                   child: Container(
                     decoration: const BoxDecoration(
-                        color: CustomColors.buttomIndicatorColor,
-                        borderRadius: BorderRadius.all(Radius.circular(5))),
+                      color: CustomColors.buttomIndicatorColor,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(5),
+                      ),
+                    ),
                     child: Padding(
                       padding: const EdgeInsets.all(7.0),
                       child: Text(
-                        'Indicação',
-                        style: CustomFont.buttonTextStyle,
+                        Strings.indicationSeal,
+                        style: CustomFontStyle.buttonTextStyle,
                       ),
                     ),
                   ),
@@ -80,14 +84,17 @@ class InkCard extends StatelessWidget {
                   }
                 },
                 icon: const Icon(
+                  
                   Icons.arrow_back,
                   size: 40,
+                  semanticLabel: 'Mover para a esquerda',
                 ),
                 color: CustomColors.borderColor,
               ),
               Image.network(
                 image,
                 scale: 8,
+                semanticLabel: 'Imagem da tinta $name',
               ),
               IconButton(
                 padding: const EdgeInsets.all(0),
@@ -107,6 +114,7 @@ class InkCard extends StatelessWidget {
                 icon: const Icon(
                   Icons.arrow_forward,
                   size: 40,
+                  semanticLabel: 'Mover para a direita',
                 ),
                 color: CustomColors.borderColor,
               ),
@@ -117,7 +125,7 @@ class InkCard extends StatelessWidget {
           ),
           Text(
             name,
-            style: CustomFont.subtitleStyle3,
+            style: CustomFontStyle.subtitleStyle3,
             textAlign: TextAlign.center,
           ),
           const Expanded(child: SizedBox()),
@@ -131,8 +139,8 @@ class InkCard extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 7),
                     child: Text(
-                      'Como pintar',
-                      style: CustomFont.buttonTextStyle2,
+                      Strings.howToPaint,
+                      style: CustomFontStyle.buttonTextStyle2,
                     ),
                   ),
                   style: ElevatedButton.styleFrom(
@@ -153,8 +161,8 @@ class InkCard extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 7),
                   child: Text(
-                    'Tirar dúvidas',
-                    style: CustomFont.buttonTextStyle2,
+                    Strings.askAQuestion,
+                    style: CustomFontStyle.buttonTextStyle2,
                   ),
                 ),
                 style: ElevatedButton.styleFrom(

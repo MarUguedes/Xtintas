@@ -35,7 +35,7 @@ class XtintadApp extends StatelessWidget {
         initialRoute:'/auth' ,
         routes: {
           '/auth':(context) => const AuthPage(),
-          '/':(context) => const LoginPage(),
+          '/loginPage':(context) => const LoginPage(),
           '/homePage':(context) => const HomePage(),
           '/howToDo':(context) => const HowToDoPAge(),
            '/satisfaction':(context) => const SatisfactionPage(),

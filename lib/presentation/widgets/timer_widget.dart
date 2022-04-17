@@ -15,7 +15,7 @@ class TimerWidget extends StatelessWidget {
         ),
         Text(
           'Aguarde 2 horas',
-          style: CustomFont.subtitleStyle2,
+          style: CustomFontStyle.subtitleStyle2,
         ),
       ],
     );

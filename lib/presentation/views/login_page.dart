@@ -1,13 +1,9 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:xtintas/controller/bloc/ink_bloc.dart';
 import 'package:xtintas/controller/bloc/login_bloc.dart';
 import 'package:xtintas/utils/custom_colors.dart';
 import 'package:xtintas/utils/fonts.dart';
-import 'package:http/http.dart' as http;
+import 'package:xtintas/utils/strings.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -32,7 +28,10 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     final loginBloc = context.read<LoginBloc>();
     final screenSize = MediaQuery.of(context).size;
-    final blocInk = context.read<BlocInk>();
+    print(screenSize.width);
+    final invalidEmail = !RegExp(
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        .hasMatch(_textMailController.text);
 
     return Scaffold(
       body: Container(
@@ -49,8 +48,8 @@ class _LoginPageState extends State<LoginPage> {
         ),
         child: Stack(clipBehavior: Clip.none, children: [
           Positioned(
-            bottom: -screenSize.height * 0.77,
-            right: -screenSize.width * 0.73,
+            bottom: -619,
+            right: -280,
             child: Container(
               height: 750,
               width: 750,
@@ -73,11 +72,14 @@ class _LoginPageState extends State<LoginPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image.asset('assets/bucket_paint.png', scale: 3),
+                        Image.asset(
+                          'assets/bucket_paint.png',
+                          scale: 3,
+                          semanticLabel: 'Ícone do aplicativo',
+                        ),
                         Text(
-                          "XTintas",
-                          style: CustomFont.titleStyle,
-                          semanticsLabel: '',
+                          Strings.appName,
+                          style: CustomFontStyle.titleStyle,
                         ),
                       ],
                     ),
@@ -85,8 +87,8 @@ class _LoginPageState extends State<LoginPage> {
                       height: screenSize.height * 0.115,
                     ),
                     Text(
-                      'Entrar na plataforma',
-                      style: CustomFont.subTitleStyle,
+                      Strings.loginPageTitle,
+                      style: CustomFontStyle.subTitleStyle,
                       textAlign: TextAlign.center,
                     ),
                     SizedBox(
@@ -97,8 +99,8 @@ class _LoginPageState extends State<LoginPage> {
                       child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            'E-mail',
-                            style: CustomFont.defaultTextStyle,
+                            Strings.mail,
+                            style: CustomFontStyle.defaultTextStyle,
                           )),
                     ),
                     TextFormField(
@@ -106,15 +108,13 @@ class _LoginPageState extends State<LoginPage> {
                       keyboardType: TextInputType.emailAddress,
                       validator: (email) {
                         if (email == null || email.isEmpty) {
-                          return 'Por favor, digite seu e-mail';
-                        } else if (!RegExp(
-                                r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                            .hasMatch(_textMailController.text)) {
-                          return 'Por favor, digite um e-mail válido';
+                          return Strings.emptyMail;
+                        } else if (invalidEmail) {
+                          return Strings.invalidMail;
                         }
                         return null;
                       },
-                      style: CustomFont.inputTextStyle,
+                      style: CustomFontStyle.inputTextStyle,
                       decoration: const InputDecoration(
                           filled: true,
                           fillColor: CustomColors.inputBoxColor,
@@ -126,8 +126,8 @@ class _LoginPageState extends State<LoginPage> {
                       child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            'Senha',
-                            style: CustomFont.defaultTextStyle,
+                            Strings.password,
+                            style: CustomFontStyle.defaultTextStyle,
                           )),
                     ),
                     TextFormField(
@@ -136,18 +136,20 @@ class _LoginPageState extends State<LoginPage> {
                       keyboardType: TextInputType.text,
                       validator: (password) {
                         if (password == null || password.isEmpty) {
-                          return 'Por favor, digite uma senha';
+                          return Strings.emptyPassword;
                         }
                         return null;
                       },
-                      style: CustomFont.inputTextStyle,
+                      style: CustomFontStyle.inputTextStyle,
                       decoration: InputDecoration(
                         suffixIcon: IconButton(
                           icon: Icon(
-                              isObscured
-                                  ? Icons.visibility_off
-                                  : Icons.visibility,
-                              color: CustomColors.defaultFontColor),
+                            isObscured
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                            color: CustomColors.defaultFontColor,
+                            semanticLabel: 'Mudar visibilidade da senha',
+                          ),
                           onPressed: setVisibility,
                         ),
                         filled: true,
@@ -162,15 +164,17 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     ElevatedButton(
                       onPressed: (() async {
-                        FocusScopeNode currentFocus = FocusScope.of(context);
-                        loginBloc.getUser(
-                            email: _textMailController.text,
-                            password: _textPasswordController.text);
+                        FocusScope.of(context).unfocus();
+
                         if (_formkey.currentState!.validate()) {
-                          bool hasLogin = await loginBloc.login();
+                          bool hasLogin = await loginBloc.login(
+                              email: _textMailController.text,
+                              password: _textPasswordController.text);
+
                           if (hasLogin) {
-                            Navigator.of(context)
-                                .pushReplacementNamed('/homePage');
+                            Navigator.of(context).pushNamedAndRemoveUntil(
+                                '/homePage', (Route<dynamic> route) => false);
+                            
                           } else {
                             _textPasswordController.clear();
                             ScaffoldMessenger.of(context)
@@ -178,9 +182,6 @@ class _LoginPageState extends State<LoginPage> {
                           }
                         }
 
-                        loginBloc.getUser(
-                            email: _textMailController.text,
-                            password: _textPasswordController.text);
                         //
                       }),
                       child: Image.asset(
@@ -197,8 +198,8 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     SizedBox(height: screenSize.height * 0.01),
                     Text(
-                      "Esqueci a minha senha",
-                      style: CustomFont.inputTextStyle2,
+                      Strings.forgotPassword,
+                      style: CustomFontStyle.inputTextStyle2,
                     )
                   ],
                 ),
@@ -211,10 +212,9 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   final snackBar = const SnackBar(
+      backgroundColor: Colors.red,
       content: Text(
-    'E-mail ou senha inválidos',
-    textAlign: TextAlign.center,
-  ));
-
- 
+        Strings.invalidLogin,
+        textAlign: TextAlign.center,
+      ));
 }
