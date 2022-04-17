@@ -34,6 +34,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     final loginBloc = context.read<LoginBloc>();
+    print(screenSize.height);
 
     return Scaffold(
         backgroundColor: CustomColors.backgroungColor,
@@ -59,7 +60,6 @@ class _HomePageState extends State<HomePage> {
                               if (leave) {
                                 Navigator.of(context)
                                     .pushReplacementNamed('/loginPage');
-                                
                               }
                             },
                           ),
@@ -118,7 +118,10 @@ class _HomePageState extends State<HomePage> {
                                   state.inks[state.currentPage].benefits!,
                               difereciaisIcons:
                                   state.inks[state.currentPage].benefits!),
-                          SizedBox(height: screenSize.height * 0.10),
+                          SizedBox(
+                              height: screenSize.height < 700
+                                  ? screenSize.height * 0.05
+                                  : screenSize.height * 0.14),
                           ElevatedButton(
                               onPressed: (() => _openLink(
                                   url:
@@ -146,8 +149,8 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 minimumSize: const Size(100, 50),
                               )),
-                          const SizedBox(
-                            height: 50,
+                          SizedBox(
+                            height: screenSize.height * 0.025,
                           ),
                         ],
                       )
@@ -161,8 +164,6 @@ class _HomePageState extends State<HomePage> {
     if (await canLaunch(url)) {
       launch(url, forceWebView: false);
       Navigator.of(context).pushNamed('/satisfaction');
-    } 
+    }
   }
-
-
 }

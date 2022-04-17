@@ -29,9 +29,10 @@ class _LoginPageState extends State<LoginPage> {
     final loginBloc = context.read<LoginBloc>();
     final screenSize = MediaQuery.of(context).size;
     print(screenSize.width);
-    final invalidEmail = !RegExp(
-            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-        .hasMatch(_textMailController.text);
+
+    final mailvalidator = RegExp(
+        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+    
 
     return Scaffold(
       body: Container(
@@ -109,7 +110,7 @@ class _LoginPageState extends State<LoginPage> {
                       validator: (email) {
                         if (email == null || email.isEmpty) {
                           return Strings.emptyMail;
-                        } else if (invalidEmail) {
+                        } else if (!mailvalidator.hasMatch(email)) {
                           return Strings.invalidMail;
                         }
                         return null;
@@ -174,7 +175,6 @@ class _LoginPageState extends State<LoginPage> {
                           if (hasLogin) {
                             Navigator.of(context).pushNamedAndRemoveUntil(
                                 '/homePage', (Route<dynamic> route) => false);
-                            
                           } else {
                             _textPasswordController.clear();
                             ScaffoldMessenger.of(context)

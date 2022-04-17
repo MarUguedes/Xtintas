@@ -42,6 +42,7 @@ class _DifferentialsCardState extends State<DifferentialsCard> {
             Strings.diferencialsTitle,
             style: CustomFontStyle.subtitleStyle,
           ),
+          const SizedBox(height: 5),
           Expanded(
             child: ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
@@ -53,8 +54,7 @@ class _DifferentialsCardState extends State<DifferentialsCard> {
                         Image.network(
                           widget.difereciais[index].icon!,
                           scale: 13,
-                          semanticLabel:
-                              ' Icone do diferêncial',
+                          semanticLabel: ' Icone do diferêncial',
                         ),
                         const SizedBox(
                           width: 10,

@@ -40,7 +40,7 @@ class InkCard extends StatelessWidget {
               blurRadius: 4,
             )
           ]),
-      height: screenSize.height * 0.37,
+      height: screenSize.height<700? screenSize.height * 0.40:screenSize.height * 0.35,
       width: screenSize.width * 0.91,
       child: Padding(
         padding: const EdgeInsets.all(10.0),

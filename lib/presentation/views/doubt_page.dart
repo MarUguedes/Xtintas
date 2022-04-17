@@ -8,7 +8,7 @@ import 'package:xtintas/utils/strings.dart';
 class DoubtPage extends StatelessWidget {
   DoubtPage({Key? key}) : super(key: key);
   TextEditingController controller = TextEditingController();
-  
+
   SnackBar showSnackBar(String mensage) {
     return SnackBar(
       content: Text(
@@ -50,7 +50,9 @@ class DoubtPage extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.all(15.0),
                           child: SizedBox(
-                            height: screenSize.height * 0.35,
+                            height: screenSize.height < 700
+                                ? screenSize.height * 0.40
+                                : screenSize.height * 0.35,
                             child: Container(
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(
@@ -83,9 +85,11 @@ class DoubtPage extends StatelessWidget {
                                       Padding(
                                         padding: const EdgeInsets.all(10.0),
                                         child: SizedBox(
-                                          height: 100,
+                                          height: screenSize.height >= 800
+                                              ? 150
+                                              : 100,
                                           child: TextFormField(
-                                            maxLines: 5,
+                                            maxLines: 6,
                                             controller: controller,
                                             decoration: const InputDecoration(
                                                 hintText: Strings.helperText,
@@ -101,16 +105,19 @@ class DoubtPage extends StatelessWidget {
                                       ),
                                       const SizedBox(height: 10),
                                       ElevatedButton(
-                                          onPressed: (() async{
+                                          onPressed: (() async {
                                             final question = controller.text;
                                             if (question.isNotEmpty) {
-                                              FocusScopeNode currentFocus = FocusScope.of(context);
-                                              blocDoubt.getQuestion(controller.text);
-                                             final response= await blocDoubt.postQuestion();
-                                             
+                                              FocusScopeNode currentFocus =
+                                                  FocusScope.of(context);
+                                              blocDoubt
+                                                  .getQuestion(controller.text);
+                                              final response = await blocDoubt
+                                                  .postQuestion();
 
                                               ScaffoldMessenger.of(context)
-                                                  .showSnackBar(showSnackBar('$response'));
+                                                  .showSnackBar(showSnackBar(
+                                                      '$response'));
                                               Navigator.of(context)
                                                   .pushReplacementNamed(
                                                       '/homePage');
