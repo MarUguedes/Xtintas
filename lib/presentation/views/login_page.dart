@@ -32,9 +32,9 @@ class _LoginPageState extends State<LoginPage> {
 
     final mailvalidator = RegExp(
         r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-    
 
     return Scaffold(
+      backgroundColor: CustomColors.backgroungLoginColor,
       body: Container(
         height: screenSize.height,
         decoration: const BoxDecoration(

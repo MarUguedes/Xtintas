@@ -16,6 +16,7 @@ class SatisfactionPage extends StatelessWidget {
       ),
     );
   }
+
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
@@ -24,7 +25,9 @@ class SatisfactionPage extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          SizedBox(height: 40,),
+          const SizedBox(
+            height: 40,
+          ),
           Align(
               alignment: Alignment.topLeft,
               child: IconButton(
@@ -32,7 +35,10 @@ class SatisfactionPage extends StatelessWidget {
                   onPressed: (() {
                     Navigator.of(context).pushNamed('/homePage');
                   }),
-                  icon: const Icon(Icons.arrow_back_ios, semanticLabel: 'Voltar para a tela inicial',))),
+                  icon: const Icon(
+                    Icons.arrow_back_ios,
+                    semanticLabel: 'Voltar para a tela inicial',
+                  ))),
           Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -64,7 +70,8 @@ class SatisfactionPage extends StatelessWidget {
                             children: [
                               Text(
                                 Strings.satisfactiontitle,
-                                style: CustomFontStyle.subtitleStyle3,semanticsLabel: 'Avalie a sua satisfação',
+                                style: CustomFontStyle.subtitleStyle3,
+                                semanticsLabel: 'Avalie a sua satisfação',
                               ),
                               SizedBox(
                                 height: screenSize.height * 0.02,
@@ -76,7 +83,9 @@ class SatisfactionPage extends StatelessWidget {
                                   Column(
                                     children: [
                                       IconButton(
-                                        tooltip: 'Fraca',
+                                          splashColor:
+                                              CustomColors.buttomSecondaryColor,
+                                          tooltip: 'Fraca',
                                           iconSize: 40,
                                           onPressed: (() {
                                             satisfactionBloc.getRating(1);
@@ -88,7 +97,9 @@ class SatisfactionPage extends StatelessWidget {
                                   Column(
                                     children: [
                                       IconButton(
-                                         tooltip: 'Mediana',
+                                        splashColor:
+                                            CustomColors.buttomSecondaryColor,
+                                        tooltip: 'Mediana',
                                         iconSize: 40,
                                         onPressed: () {
                                           satisfactionBloc.getRating(2);
@@ -101,7 +112,9 @@ class SatisfactionPage extends StatelessWidget {
                                   Column(
                                     children: [
                                       IconButton(
-                                         tooltip: 'Ótima',
+                                        splashColor:
+                                            CustomColors.buttomSecondaryColor,
+                                        tooltip: 'Ótima',
                                         iconSize: 40,
                                         onPressed: () {
                                           satisfactionBloc.getRating(3);
@@ -116,22 +129,25 @@ class SatisfactionPage extends StatelessWidget {
                               SizedBox(
                                 height: screenSize.height * 0.02,
                               ),
-                              BlocBuilder<SatisfactionBloc, SatisfactionBlocState>(
+                              BlocBuilder<SatisfactionBloc,
+                                      SatisfactionBlocState>(
                                   builder: ((context, state) {
                                 return ElevatedButton(
-                                    onPressed: (() async{
+                                    onPressed: (() async {
                                       if (state.satisfaction >= 1 ||
                                           state.satisfaction <= 3) {
-                                            final apiResponse= await satisfactionBloc.postRating();
-                                       
-                                        ScaffoldMessenger.of(context).showSnackBar(showSnackBar(apiResponse));
+                                        final apiResponse =
+                                            await satisfactionBloc.postRating();
 
-                                        satisfactionBloc.getRating(0);// para zerar o estado 
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                                showSnackBar(apiResponse));
+
+                                        satisfactionBloc.getRating(
+                                            0); // para zerar o estado
                                         Navigator.of(context)
                                             .pushNamed('/homePage');
-                                      }else{
-                                        
-                                      }
+                                      } else {}
                                     }),
                                     child: const Text(Strings.submitText),
                                     style: ElevatedButton.styleFrom(
