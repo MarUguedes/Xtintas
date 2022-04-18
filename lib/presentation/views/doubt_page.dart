@@ -86,7 +86,7 @@ class DoubtPage extends StatelessWidget {
                                         padding: const EdgeInsets.all(10.0),
                                         child: SizedBox(
                                           height: screenSize.height >= 800
-                                              ? 150
+                                              ? 110
                                               : 100,
                                           child: TextFormField(
                                             maxLines: 6,
