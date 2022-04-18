@@ -5,8 +5,9 @@ Desafio Mobile Loomi
 Gerência de Estado: <br>
 Bloc<br>
 
-Packeges utilizados:<br>
+Packages utilizados:<br>
 bloc<br>
+http<br>
 flutter_bloc<br>
 shared_preferences<br>
 url_launcher<br>
