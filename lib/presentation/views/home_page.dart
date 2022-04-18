@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     final loginBloc = context.read<LoginBloc>();
-    print(screenSize.height);
+   
 
     return Scaffold(
         backgroundColor: CustomColors.backgroungColor,
@@ -99,6 +99,7 @@ class _HomePageState extends State<HomePage> {
                                 child: Column(
                                   children: [
                                     InkCard(
+                                      appState: state.status,
                                         currentIndex: index,
                                         pages: state.inks.length,
                                         pageController: pageController,

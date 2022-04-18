@@ -9,7 +9,6 @@ import 'package:xtintas/presentation/views/doubt_page.dart';
 import 'package:xtintas/presentation/views/how_to_do_page.dart';
 import 'package:xtintas/presentation/views/login_page.dart';
 import 'package:xtintas/presentation/views/satisfaction_page.dart';
-
 import 'presentation/views/home_page.dart';
 
 void main() {

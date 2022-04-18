@@ -14,7 +14,7 @@ class InkRepository {
 
     final mapJson = json['data'].map<Ink>((ink) => Ink.fromJson(ink)).toList();
     
-    print(mapJson);
+   
     return mapJson;
   }
 }

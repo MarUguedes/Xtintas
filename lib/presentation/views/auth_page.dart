@@ -25,7 +25,7 @@ class _AuthPageState extends State<AuthPage> {
 
   @override
   Widget build(BuildContext context) {
-    final blocInk = context.read<BlocInk>();
+    
     return const Scaffold(
       body: Center(
         child: CircularProgressIndicator(),

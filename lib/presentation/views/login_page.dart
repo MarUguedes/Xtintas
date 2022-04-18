@@ -28,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     final loginBloc = context.read<LoginBloc>();
     final screenSize = MediaQuery.of(context).size;
-    print(screenSize.width);
+    
 
     final mailvalidator = RegExp(
         r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");

@@ -25,9 +25,8 @@ class DoubtBloc extends Cubit<DoubtBlocState> {
   }
 
   Future postQuestion() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
     final response = await doubtRepository.postQuestion(state.question);
-    print(response);
     return response['message'];
   }
 }

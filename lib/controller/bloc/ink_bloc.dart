@@ -37,8 +37,6 @@ class BlocInk extends Cubit<BlocInkState> {
     } catch (error) {
       emit(state.copyWith(status: StatusInk.error));
     }
-    state.inks.forEach(
-      (element) => print('${element.name}'),
-    );
+    
   }
 }

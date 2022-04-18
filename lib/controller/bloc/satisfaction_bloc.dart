@@ -22,7 +22,7 @@ class SatisfactionBloc extends Cubit<SatisfactionBlocState> {
 
   void getRating(int rating) {
     emit(state.copyWith(satisfaction: rating));
-    print(rating);
+    
   }
 
   Future<String> postRating() async {

@@ -8,6 +8,7 @@ import 'package:xtintas/utils/strings.dart';
 class InkCard extends StatelessWidget {
   const InkCard(
       {Key? key,
+      required this.appState,
       required this.pageController,
       required this.pages,
       required this.isIndicator,
@@ -18,6 +19,7 @@ class InkCard extends StatelessWidget {
   final bool isIndicator;
   final int currentIndex;
   final int pages;
+  final StatusInk appState;
   final String image;
   final String name;
   final PageController pageController;
@@ -40,7 +42,9 @@ class InkCard extends StatelessWidget {
               blurRadius: 4,
             )
           ]),
-      height: screenSize.height<700? screenSize.height * 0.40:screenSize.height * 0.35,
+      height: screenSize.height < 700
+          ? screenSize.height * 0.40
+          : screenSize.height * 0.35,
       width: screenSize.width * 0.91,
       child: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -84,18 +88,20 @@ class InkCard extends StatelessWidget {
                   }
                 },
                 icon: const Icon(
-                  
                   Icons.arrow_back,
                   size: 40,
                   semanticLabel: 'Mover para a esquerda',
                 ),
                 color: CustomColors.borderColor,
               ),
-              Image.network(
-                image,
-                scale: 8,
-                semanticLabel: 'Imagem da tinta $name',
-              ),
+              appState == StatusInk.success
+                  ? Image.network(
+                      image,
+                      scale: 8,
+                      semanticLabel: 'Imagem da tinta $name',
+                    )
+                  : const SizedBox(
+                       child: CircularProgressIndicator()),
               IconButton(
                 padding: const EdgeInsets.all(0),
                 onPressed: (() {
